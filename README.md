@@ -10,7 +10,7 @@ Unless modified in `config.js` server will use port 5001
 ## API
 Use an Authorization header to work with your own data:
 
-  fetch(url, { headers: { 'Authorization': 'whatever-you-want' }})
+`fetch(url, { headers: { 'Authorization': 'whatever-you-want' }})`
 
 The following endpoints are available:  
 
@@ -53,7 +53,7 @@ The following endpoints are available:
 `PUT /posts/:id`  
   **USAGE:**  
     Edit the details of an existing post  
-    
+
   **PARAMS:**  
     title - String  
     body - String  
