@@ -53,6 +53,7 @@ The following endpoints are available:
 `PUT /posts/:id`  
   **USAGE:**  
     Edit the details of an existing post  
+    
   **PARAMS:**  
     title - String  
     body - String  
