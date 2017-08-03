@@ -17,7 +17,7 @@ app.use(cors())
 app.get('/', (req, res) => {
   const help = `
   <pre>
-    Welcome to the Udacity Reddit Clone API!
+    Welcome to the Udacity Readable API!
 
     Use an Authorization header to work with your own data:
 
@@ -296,7 +296,7 @@ app.post('/comments/:id', bodyParser.json(), (req, res) => {
           (error) => {
               console.error(error)
               res.status(500).send({
-                  error: 'There was an error.`
+                  error: 'There was an error.'
               })
           }
       )
