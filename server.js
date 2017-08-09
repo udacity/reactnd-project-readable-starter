@@ -47,7 +47,7 @@ app.get('/', (req, res) => {
         timestamp - timestamp in whatever format you like, you can use Date.now() if you like
         title - String
         body - String
-        owner - String
+        author - String
         category: Any of the categories listed in categories.js. Feel free to extend this list as you desire.
 
     GET /posts/:id
@@ -84,7 +84,7 @@ app.get('/', (req, res) => {
         id: Any unique ID. As with posts, UUID is probably the best here.
         timestamp: timestamp. Get this however you want.
         body: String
-        owner: String
+        author: String
         parentId: Should match a post id in the database.
 
     GET /comments/:id
