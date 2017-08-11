@@ -30,13 +30,13 @@ The following endpoints are available:
 `POST /posts`  
   **USAGE:**  
     Add a new post  
-  
+
   **PARAMS:**   
     id - UUID should be fine, but any unique id will work  
     timestamp - timestamp in whatever format you like, you can use Date.now() if you like  
     title - String  
     body - String  
-    owner - String  
+    author - String  
     category: Any of the categories listed in categories.js. Feel free to extend this list as you desire.  
 
 `GET /posts/:id`  
@@ -49,7 +49,7 @@ The following endpoints are available:
 
   **PARAMS:**  
     option - String: Either "upVote" or "downVote"  
-    
+
 `PUT /posts/:id`  
   **USAGE:**  
     Edit the details of an existing post  
@@ -62,7 +62,7 @@ The following endpoints are available:
   **USAGE:**  
     Sets the deleted flag for a post to 'true'.   
     Sets the parentDeleted flag for all child comments to 'true'.  
-  
+
 `GET /posts/:id/comments`  
   **USAGE:**  
     Get all the comments for a single post  
@@ -75,7 +75,7 @@ The following endpoints are available:
     id: Any unique ID. As with posts, UUID is probably the best here.  
     timestamp: timestamp. Get this however you want.  
     body: String  
-    owner: String  
+    author: String  
     parentId: Should match a post id in the database.  
 
 `GET /comments/:id`  
@@ -89,7 +89,7 @@ The following endpoints are available:
 `PUT /comments/:id`  
   **USAGE:**  
     Edit the details of an existing comment  
-  
+
   **PARAMS:**  
     timestamp: timestamp. Get this however you want.  
     body: String  
