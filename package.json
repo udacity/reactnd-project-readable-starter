@@ -39,6 +39,12 @@
     "redux": "^3.7.2"
   },
   "devDependencies": {
+    "babel-eslint": "^7.2.3",
+    "eslint": "^4.5.0",
+    "eslint-config-airbnb": "^15.1.0",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-jsx-a11y": "^5.1.1",
+    "eslint-plugin-react": "^7.3.0",
     "html-webpack-plugin": "^2.30.1",
     "webpack": "^3.5.5",
     "webpack-dev-server": "^2.7.1"

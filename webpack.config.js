@@ -2,7 +2,7 @@ const path = require('path');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const config = {
-  entry: ['babel-polyfill', './src/components/Index.js'],
+  entry: ['babel-polyfill', './src/components/Index.jsx'],
   output: {
     path: path.resolve(__dirname, 'public'),
     filename: 'bundle.js'
@@ -14,7 +14,7 @@ const config = {
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.jsx?$/,
         exclude: /(node_modules|bower_components)/,
         use: {
           loader: 'babel-loader',
