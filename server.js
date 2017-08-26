@@ -26,10 +26,10 @@ app.get('/', (req, res) => {
     The following endpoints are available:
 
     GET /categories
-      USAGE: 
+      USAGE:
         Get all of the categories available for the app. List is found in categories.js.
         Feel free to extend this list as you desire.
-    
+
     GET /:category/posts
       USAGE:
         Get all of the posts for a particular category
@@ -37,12 +37,12 @@ app.get('/', (req, res) => {
     GET /posts
       USAGE:
         Get all of the posts. Useful for the main page when no category is selected.
-    
+
     POST /posts
       USAGE:
         Add a new post
-      
-      PARAMS: 
+
+      PARAMS:
         id - UUID should be fine, but any unique id will work
         timestamp - timestamp in whatever format you like, you can use Date.now() if you like
         title - String
@@ -59,7 +59,7 @@ app.get('/', (req, res) => {
         Used for voting on a post
       PARAMS:
         option - String: Either "upVote" or "downVote"
-        
+
     PUT /posts/:id
       USAGE:
         Edit the details of an existing post
@@ -69,13 +69,13 @@ app.get('/', (req, res) => {
 
     DELETE /posts/:id
       USAGE:
-        Sets the deleted flag for a post to 'true'. 
+        Sets the deleted flag for a post to 'true'.
         Sets the parentDeleted flag for all child comments to 'true'.
-      
+
     GET /posts/:id/comments
       USAGE:
         Get all the comments for a single post
-    
+
     POST /comments
       USAGE:
         Add a comment to a post
@@ -98,7 +98,7 @@ app.get('/', (req, res) => {
     PUT /comments/:id
       USAGE:
         Edit the details of an existing comment
-     
+
       PARAMS:
         timestamp: timestamp. Get this however you want.
         body: String
@@ -194,9 +194,9 @@ app.get('/posts/:id', (req, res) => {
 app.delete('/posts/:id', (req, res) => {
     posts.disable(req.token, req.params.id)
       .then(
-          (post) => {
+          (post) =>
               comments.disableByParent(req.token, post)
-          })
+          )
       .then(
           (data) => res.send(data),
           (error) => {
