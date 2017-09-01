@@ -12,8 +12,12 @@
   "author": "David Harris",
   "license": "ISC",
   "scripts": {
-    "start": "webpack-dev-server --open"
+    "start": "webpack-dev-server --open",
+    "lint": "eslint --ext .js --ext .jsx ."
   },
+  "pre-commit": [
+    "lint"
+  ],
   "babel": {
     "presets": [
       "react",
@@ -46,6 +50,7 @@
     "eslint-plugin-jsx-a11y": "^5.1.1",
     "eslint-plugin-react": "^7.3.0",
     "html-webpack-plugin": "^2.30.1",
+    "pre-commit": "^1.2.2",
     "webpack": "^3.5.5",
     "webpack-dev-server": "^2.7.1"
   }
