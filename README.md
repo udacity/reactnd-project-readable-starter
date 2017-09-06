@@ -4,13 +4,13 @@
 
 Install packages: `npm install`
 Launch server: `node server`
-Unless modified in `config.js` server will use port 5001
+Unless modified in `config.js` server will use port 3001
 
 
 ## API
-Use an Authorization header to work with your own data:
+Use an AuthorizationReactND header to work with your own data:
 
-`fetch(url, { headers: { 'Authorization': 'whatever-you-want' }})`
+`fetch(url, { headers: { 'AuthorizationReactND': 'whatever-you-want' }})`
 
 The following endpoints are available:  
 
