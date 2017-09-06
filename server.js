@@ -113,7 +113,7 @@ app.get('/', (req, res) => {
 })
 
 app.use((req, res, next) => {
-  const token = req.get('AuthorizationReactND')
+  const token = req.get('Authorization')
 
   if (token) {
     req.token = token
