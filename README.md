@@ -36,7 +36,7 @@ The following endpoints are available:
     timestamp - timestamp in whatever format you like, you can use Date.now() if you like  
     title - String  
     body - String  
-    owner - String  
+    author - String  
     category: Any of the categories listed in categories.js. Feel free to extend this list as you desire.  
 
 `GET /posts/:id`  
