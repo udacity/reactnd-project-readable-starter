@@ -4,6 +4,7 @@ import { Route } from 'react-router-dom';
 
 import Categories from './Categories';
 import CategoryPosts from './CategoryPosts';
+import AllBlogPost from './AllBlogPost';
 // import * as BlogAPI from '../http-service';
 
 class Main extends Component {
@@ -22,7 +23,16 @@ class Main extends Component {
   render() {
     return (
       <div>
-        <Route exact path="/" component={Categories} />
+        <Route
+          exact
+          path="/"
+          render={() => (
+            <div>
+              <Categories />
+              <AllBlogPost />
+            </div>
+          )}
+        />
         <Route path="/redux" component={CategoryPosts} />
         <Route path="/react" component={CategoryPosts} />
         <Route path="/udacity" component={CategoryPosts} />

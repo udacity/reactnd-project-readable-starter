@@ -7,7 +7,7 @@ import thunk from 'redux-thunk';
 
 import reducer from './reducers';
 import App from './components/App';
-import { fetchCategories } from './actions/index';
+import { fetchCategories, fetchAllPosts } from './actions/index';
 
 /* eslint no-underscore-dangle: 0 */
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -17,6 +17,7 @@ const store = createStore(
 );
 
 store.dispatch(fetchCategories());
+store.dispatch(fetchAllPosts());
 
 ReactDOM.render(
   <Provider store={store}>
