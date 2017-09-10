@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+import { Route } from 'react-router-dom';
 // import uuidv4 from 'uuid/v4';
 
 import Categories from './Categories';
+import CategoryPosts from './CategoryPosts';
 // import * as BlogAPI from '../http-service';
 
 class Main extends Component {
@@ -20,7 +22,10 @@ class Main extends Component {
   render() {
     return (
       <div>
-        <Categories />
+        <Route exact path="/" component={Categories} />
+        <Route path="/redux" component={CategoryPosts} />
+        <Route path="/react" component={CategoryPosts} />
+        <Route path="/udacity" component={CategoryPosts} />
       </div>
     );
   }
