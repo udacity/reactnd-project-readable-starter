@@ -111,6 +111,7 @@ function disable (token, id) {
 function edit (token, id, comment) {
     return new Promise((res) => {
         let comments = getData(token)
+        comment = comments[id]
         for (prop in comment) {
             comments[id][prop] = comment[prop]
         }
