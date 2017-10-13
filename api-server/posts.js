@@ -12,7 +12,7 @@ const defaultData = {
     category: 'react',
     voteScore: 6,
     deleted: false,
-		commentCount: 2
+    commentCount: 2
   },
   "6ni6ok3ym7mf1p33lnez": {
     id: '6ni6ok3ym7mf1p33lnez',
@@ -23,7 +23,7 @@ const defaultData = {
     category: 'redux',
     voteScore: -5,
     deleted: false,
-		commentCount: 0
+    commentCount: 0
   }
 }
 
@@ -120,10 +120,10 @@ function edit (token, id, post) {
 }
 
 function incrementCommentCounter(token, id, count) {
-	const data = getData(token)
-	if (data[id]) {
-		data[id].commentCount += count
-	}
+  const data = getData(token)
+  if (data[id]) {
+    data[id].commentCount += count
+  }
 }
 
 module.exports = {
@@ -135,5 +135,5 @@ module.exports = {
   disable,
   edit,
   getAll,
-	incrementCommentCounter
+  incrementCommentCounter
 }
