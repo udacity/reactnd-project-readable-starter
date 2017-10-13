@@ -11,7 +11,8 @@ const defaultData = {
     author: 'thingtwo',
     category: 'react',
     voteScore: 6,
-    deleted: false
+    deleted: false,
+		commentCount: 2
   },
   "6ni6ok3ym7mf1p33lnez": {
     id: '6ni6ok3ym7mf1p33lnez',
@@ -21,7 +22,8 @@ const defaultData = {
     author: 'thingone',
     category: 'redux',
     voteScore: -5,
-    deleted: false
+    deleted: false,
+		commentCount: 0
   }
 }
 
@@ -117,6 +119,13 @@ function edit (token, id, post) {
     })
 }
 
+function incrementCommentCounter(token, id, count) {
+	const data = getData(token)
+	if (data[id]) {
+		data[id].commentCount += count
+	}
+}
+
 module.exports = {
   get,
   getAll,
@@ -125,5 +134,6 @@ module.exports = {
   vote,
   disable,
   edit,
-  getAll
+  getAll,
+	incrementCommentCounter
 }
