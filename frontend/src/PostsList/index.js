@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import Post from '../Post/'
+import { addPost, removePost } from './actions'
 
 class PostsList extends Component {
 
-	render() {
 
+	componentDidMount() {
 		const postsList = [
 			{
 				"id": "8xf0y6ziyjabvozdd253nd",
@@ -29,8 +31,16 @@ class PostsList extends Component {
 				"commentCount": 0
 			}
 		];
+		
+		for(let i=0; i<postsList.length; i++){
+			this.props.addPost(postsList[0]);
+		}
+	};
 
+	render() {
 
+		const { postsList, addPost } = this.props;
+		debugger
 		return (
 			<div className="list-posts-frame">
 				{postsList && Array.isArray(postsList) && postsList.map( (post) => (
@@ -41,9 +51,22 @@ class PostsList extends Component {
 						/>
 					</div>
 				))}
+
 			</div>
 		)
 	}
 }
 
-export default PostsList;
+function mapStateToProps ({postsList}) {
+	return {
+		postsList
+	}
+}
+
+function mapDispatchToProps (dispatch) {
+	return {
+		addPost: (data) => dispatch(addPost(data)),
+	}
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(PostsList);
