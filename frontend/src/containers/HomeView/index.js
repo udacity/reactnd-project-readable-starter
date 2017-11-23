@@ -1,11 +1,31 @@
 import React from 'react';
+import { requestCategories } from '../../reducers/categories'
+import { connect } from 'react-redux'
 
-const HomeView = () => {
+const HomeView = (props) => {
+  const {requestCategories, categories} = props
+
+  requestCategories()
+
   return (
     <div>
-      Home
+      <ul>
+        {categories.map(cat => (
+          <li key={cat.name}>
+            {cat.name}
+          </li>
+        ))}
+      </ul>
     </div>
   )
 }
 
-export default HomeView
+const mapStateToProps = state => ({
+  categories: state.categories.list
+})
+
+const mapDispatchToProps = {
+  requestCategories: requestCategories
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(HomeView)
