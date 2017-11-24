@@ -3,11 +3,12 @@ import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import {
   fetchActivePost,
-  fetchCommentsForPost
   } from '../../actions/activePost'
+import {
+  fetchCommentsForPost,
+} from '../../actions/activeComments'
 import Post from '../Post'
-import CommentsList from '../CommentsList'
-import VotingBoothContainer from '../VotingBoothContainer'
+import Comment from '../Comment'
 
 class ActivePostView extends Component{
   static propTypes = {
@@ -32,8 +33,17 @@ class ActivePostView extends Component{
     return (
       <div>
         <Post post={post}/>
-        <VotingBoothContainer />
-        <CommentsList comments={comments} />
+        <ul>
+          {comments.map( c => (
+            <li key={c.id}>
+              <Comment
+                author={c.author}
+                body={c.body}
+                timestamp={c.timestamp}
+              />
+            </li>
+          ))}
+        </ul>
       </div>
     )
   }
@@ -41,7 +51,7 @@ class ActivePostView extends Component{
 
 const mapStateToProps = state => ({
   post: state.activePost.post,
-  comments: state.activePost.comments
+  comments: state.activeComments.comments
 })
 
 const mapDispatchToProps = {

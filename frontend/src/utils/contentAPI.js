@@ -34,7 +34,9 @@ export const getPost = (postId) => fetch(`${api}/posts/${postId}`, {
     res => res.json()
   )
 
-const castVote = (postId, vote) => fetch(`${api}/posts/${postId}`, {
+// type should be 'comments' or 'posts'
+// vote should be 'upVote' or 'downVote'
+export const castVote = (type, id, vote) => fetch(`${api}/${type}/${id}`, {
     method: 'POST',
     headers: {
       ...headers,
@@ -42,8 +44,6 @@ const castVote = (postId, vote) => fetch(`${api}/posts/${postId}`, {
     },
     body: JSON.stringify({option: vote})
   }).then(res =>res.json())
-export const decrementVoteScore = postId => castVote(postId, 'downVote')
-export const incrementVoteScore = postId => castVote(postId, 'upVote')
 
 // Comment Methods
 export const getComments = (postId) => fetch(`${api}/posts/${postId}/comments`, {

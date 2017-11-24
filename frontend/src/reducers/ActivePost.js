@@ -1,16 +1,12 @@
 import {
   REQUEST_POST,
   SET_ACTIVE_POST,
-  INCREMENT_VOTE,
-  DECREMENT_VOTE,
-  REQUEST_COMMENTS_FOR_POST,
-  SET_COMMENTS_FOR_POST
+  CAST_VOTE_ON_POST
 } from '../actions'
+import {voteIncrements} from '../actions/voting'
 
 const initialState = {
-  postIsLoading: false,
-  commentsAreLoading:false,
-  comments:[],
+  isLoading:false,
   post: {}
 }
 
@@ -19,40 +15,21 @@ export default (state=initialState, action) => {
     case REQUEST_POST:
       return {
         ...state,
-        postIsLoading: true
+        isLoading: true
       }
     case SET_ACTIVE_POST:
       return {
         ...state,
-        postIsLoading: false,
+        isLoading: false,
         post: action.post
       }
-    case INCREMENT_VOTE:
+    case CAST_VOTE_ON_POST:
       return {
         ...state,
         post: {
           ...state.post,
-          voteScore: state.post.voteScore + 1
+          voteScore: state.post.voteScore + voteIncrements[action.vote]
         }
-      }
-    case DECREMENT_VOTE:
-      return {
-        ...state,
-        post: {
-          ...state.post,
-          voteScore: state.post.voteScore - 1
-        }
-      }
-    case REQUEST_COMMENTS_FOR_POST:
-      return {
-        ...state,
-        commentsAreLoading:true
-      }
-    case SET_COMMENTS_FOR_POST:
-      return {
-        ...state,
-        commentsAreLoading: false,
-        comments: action.comments
       }
     default:
       return state
