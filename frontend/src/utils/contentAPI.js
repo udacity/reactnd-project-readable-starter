@@ -5,6 +5,7 @@ const headers = {
   Authorization: token
 }
 
+// Category Methods
 export const getCategories = () => fetch(`${api}/categories`, {
     method: 'GET',
     headers: {
@@ -14,6 +15,7 @@ export const getCategories = () => fetch(`${api}/categories`, {
     res => res.json()
   )
 
+// Post Methods
 export const getAllPosts = () => fetch(`${api}/posts`, {
     method: 'GET',
     headers: {
@@ -42,3 +44,13 @@ const castVote = (postId, vote) => fetch(`${api}/posts/${postId}`, {
   }).then(res =>res.json())
 export const decrementVoteScore = postId => castVote(postId, 'downVote')
 export const incrementVoteScore = postId => castVote(postId, 'upVote')
+
+// Comment Methods
+export const getComments = (postId) => fetch(`${api}/posts/${postId}/comments`, {
+    method: 'GET',
+    headers: {
+      ...headers
+    }
+  }).then(
+    res => res.json()
+  )
