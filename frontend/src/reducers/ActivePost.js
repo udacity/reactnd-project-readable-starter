@@ -1,18 +1,22 @@
-export const REQUEST_POST = 'REQUEST_POST'
-export const UPDATE_CURRENT_POST = 'UPDATE_CURRENT_POST'
-
-export const CREATE_POST = 'CREATE_POST'
-export const EDIT_POST = 'EDIT_POST'
-export const DELETE_POST = 'DELETE_POST'
-
-export const INCREMENT_VOTE = 'INCREMENT_VOTE'
-export const DECREMENT_VOTE = 'DECREMENT_VOTE'
+import {REQUEST_POST, SET_ACTIVE_POST} from '../actions'
 
 const initialState = {
+  isLoading: false,
+  post: {}
 }
 
 export default (state=initialState, action) => {
   switch(action.type) {
+    case REQUEST_POST:
+      return {
+        ...state,
+        isLoading:true
+      }
+    case SET_ACTIVE_POST:
+      return {
+        ...state,
+        post: action.post
+      }
     default:
       return state
   }

@@ -18,12 +18,11 @@ export const getAllPosts = () => fetch(`${api}/posts`, {
     res => res.json()
   )
 
-export const getAllPostsFromCategory = (category) => fetch(
-    `${api}/:${category}/posts`, {
+export const getPost = (postId) => fetch(`${api}/posts/${postId}`, {
     method: 'GET',
     headers: {
       'Authorization': 'authorized'
     }
   }).then(
     res => res.json()
-)
+  )
