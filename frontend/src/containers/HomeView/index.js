@@ -3,6 +3,7 @@ import { fetchCategories } from '../../actions/categories'
 import { fetchPosts } from '../../actions/posts'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
+import CategoriesList from '../CategoriesList'
 
 class HomeView extends Component {
 
@@ -23,13 +24,7 @@ class HomeView extends Component {
 
     return (
       <div>
-        <ul>
-          {categories.map(cat => (
-            <li key={cat.name}>
-              {cat.name}
-            </li>
-          ))}
-        </ul>
+        <CategoriesList categories={categories}/>
       </div>
     )
   }
