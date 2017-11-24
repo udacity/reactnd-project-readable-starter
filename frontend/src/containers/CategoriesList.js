@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types'
 
-const CategoryList = (props) => {
+const CategoriesList = (props) => {
   const {categories} = props
 
   return (
@@ -15,8 +15,8 @@ const CategoryList = (props) => {
   )
 }
 
-CategoryList.propTypes = {
+CategoriesList.propTypes = {
   categories: PropTypes.array.isRequired
 }
 
-export default CategoryList
+export default CategoriesList
