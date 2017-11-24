@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types'
+import {Link} from 'react-router-dom'
 
 const CategoriesList = (props) => {
   const {categories} = props
@@ -8,7 +9,7 @@ const CategoriesList = (props) => {
     <ul>
       {categories.map(cat => (
         <li key={cat.name}>
-          {cat.name}
+          <Link to={`/category/${cat.path}`}>{cat.name}</Link>
         </li>
       ))}
     </ul>

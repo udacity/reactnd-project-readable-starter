@@ -1,5 +1,14 @@
-import {REQUEST_POST, SET_ACTIVE_POST} from './index'
-import {getPost} from '../utils/contentAPI'
+import {
+  REQUEST_POST,
+  SET_ACTIVE_POST,
+  INCREMENT_VOTE,
+  DECREMENT_VOTE
+ } from './index'
+import {
+  getPost,
+  incrementVoteScore as incrementVoteScoreInDB,
+  decrementVoteScore as decrementVoteScoreInDB,
+} from '../utils/contentAPI'
 
 export const setActivePost = post => ({
   type: SET_ACTIVE_POST,
@@ -20,5 +29,25 @@ export const fetchActivePost = postId => {
         dispatch(setActivePost(res))
       }
     )
+  }
+}
+
+export const incrementVoteScoreAndUpdateDB = (postId) => {
+  return dispatch => {
+    dispatch({
+      type: INCREMENT_VOTE,
+    })
+
+    incrementVoteScoreInDB(postId)
+  }
+}
+
+export const decrementVoteScoreAndUpdateDB = (postId) => {
+  return dispatch => {
+    dispatch({
+      type: DECREMENT_VOTE,
+    })
+
+    decrementVoteScoreInDB(postId)
   }
 }

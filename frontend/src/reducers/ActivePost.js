@@ -1,4 +1,9 @@
-import {REQUEST_POST, SET_ACTIVE_POST} from '../actions'
+import {
+  REQUEST_POST,
+  SET_ACTIVE_POST,
+  INCREMENT_VOTE,
+  DECREMENT_VOTE
+} from '../actions'
 
 const initialState = {
   isLoading: false,
@@ -16,6 +21,22 @@ export default (state=initialState, action) => {
       return {
         ...state,
         post: action.post
+      }
+    case INCREMENT_VOTE:
+      return {
+        ...state,
+        post: {
+          ...state.post,
+          voteScore: state.post.voteScore + 1
+        }
+      }
+    case DECREMENT_VOTE:
+      return {
+        ...state,
+        post: {
+          ...state.post,
+          voteScore: state.post.voteScore - 1
+        }
       }
     default:
       return state

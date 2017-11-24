@@ -1,8 +1,10 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux'
+import {Link} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import {fetchActivePost} from '../../actions/activePost'
 import Post from '../Post'
+import VotingBoothContainer from '../VotingBoothContainer'
 
 class ActivePostView extends Component{
   static propTypes = {
@@ -24,6 +26,7 @@ class ActivePostView extends Component{
     return (
       <div>
         <Post post={post}/>
+        <VotingBoothContainer />
       </div>
     )
   }

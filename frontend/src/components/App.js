@@ -1,6 +1,7 @@
 
 import React, {Component} from 'react';
-import { Route, Switch } from 'react-router-dom'
+import {withRouter} from 'react-router'
+import { Route, Switch, Link } from 'react-router-dom'
 import HomeView from './HomeView'
 import CategoryView from './CategoryView'
 import ActivePostView from './ActivePostView'
@@ -24,6 +25,9 @@ class App extends Component {
   render(){
     return (
       <div>
+        <header>
+          <Link to="/">Home</Link>
+        </header>
         <main>
           <Switch>
             <Route exact path="/" component={HomeView} />
@@ -42,4 +46,4 @@ const mapDispatchToProps = {
   fetchCategories: fetchCategories,
 }
 
-export default connect(null, mapDispatchToProps)(App)
+export default withRouter(connect(null, mapDispatchToProps)(App))
