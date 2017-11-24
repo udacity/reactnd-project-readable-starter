@@ -9,8 +9,8 @@ import PostsList from './PostsList/';
 class App extends Component {
 	render() {
 		return (
-			<div className="App">
-				<Route exact path="/" render={() => <PostsList />}  />
+			<div className="App main-frame">
+				<Route exact path="/" render={() => <PostsList />}  />		
 			</div>
 		);
 	}

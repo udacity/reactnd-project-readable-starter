@@ -4,6 +4,11 @@ body {
   font-family: sans-serif;
 }
 
+.main-frame {
+	max-width: 992px;
+	margin: 0 auto;
+}
+
 .post {
 	margin-top: 10px;
 	margin-bottom: 10px;
@@ -69,10 +74,12 @@ body {
 	font-size: 12px;
 }
 
-.vote-up {
+.vote-up, .vote-number, .vote-down {
 	float: right;
+	width: 33%;
 }
 
-.vote-down {
-	float: left;
+.vote-frame {
+	width: 70px;
+	height: 15px;
 }

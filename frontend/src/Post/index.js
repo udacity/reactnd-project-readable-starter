@@ -45,18 +45,21 @@ class Post extends Component {
 
 				{/* The footer has the votes and comments  */}
 				<div className="post-frame head-footer">
-					{/* Votes and  */}
-					<div className="row">
-						<div className="vote-up">
-							<FaThumbsOUp />
-						</div>
-						<div className="vote-number">
-							{post.voteScore}
-						</div>
-						<div className="vote-down">
-							<FaThumbsODown />
+					{/* Vote frame with up/down and number items  */}
+					<div className="vote-frame">						
+						<div className="row">
+							<div className="vote-up">
+								<FaThumbsOUp />
+							</div>
+							<div className="vote-number">
+								{post.voteScore}
+							</div>
+							<div className="vote-down">
+								<FaThumbsODown />
+							</div>
 						</div>
 					</div>
+					
 				</div>
 			</div>
 			

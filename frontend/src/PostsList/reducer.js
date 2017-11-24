@@ -1,17 +1,30 @@
 import {
     ADD_POST,
-    REMOVE_POST
+	REMOVE_POST,
+	REQUEST_POSTS,
+	RECEIVE_POSTS
 } from './actions'
 
-export function postsList (state = [], action) {
-    switch (action.type) {
+export function postsList (state = { items: [], isLoading: false }, actionData) {
+    switch (actionData.type) {
+		case REQUEST_POSTS:
+			return {
+				...state,
+				isLoading: true
+			}		
+		case RECEIVE_POSTS: 
+			const { posts } = actionData; 
+			return {
+				...state,
+				items: posts.filter(post => !post.deleted),
+				isLoading: false
+			}		
         case ADD_POST:
-            const { newPost } = action;
-            debugger
-            state.push(newPost);
-            return state;
+			const { newPost } = actionData;
+			const newState = [...state, newPost];
+            return newState;
         case REMOVE_POST:
-            const { id } = action;
+            const { id } = actionData;
             const  idx = state.findIndex(obj => obj.id === id)
             return {
                 postList: [
