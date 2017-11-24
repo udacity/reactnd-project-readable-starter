@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import { fetchCategories } from '../../reducers/Categories'
-import { fetchPosts } from '../../reducers/Posts'
+import { fetchCategories } from '../../actions/categories'
+import { fetchPosts } from '../../actions/posts'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 

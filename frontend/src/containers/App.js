@@ -1,10 +1,10 @@
 
 import React from 'react';
-import { Route, Link } from 'react-router-dom'
-import HomeView from '../HomeView'
-import CategoryView from '../CategoryView'
-import SinglePostView from '../SinglePostView'
-import NewPostView from '../NewPostView'
+import { Route } from 'react-router-dom'
+import HomeView from './HomeView'
+import CategoryView from './CategoryView'
+import SinglePostView from './SinglePostView'
+import NewPostView from './NewPostView'
 
 const App = () => (
   <div>

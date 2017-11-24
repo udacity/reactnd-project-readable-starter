@@ -1,7 +1,4 @@
-import {getCategories} from '../utils/contentAPI'
-
-export const REQUEST_CATEGORIES = 'REQUEST_CATEGORIES'
-export const UPDATE_CATEGORIES = 'UPDATE_CATEGORIES'
+import { REQUEST_CATEGORIES, UPDATE_CATEGORIES } from '../actions'
 
 const initialState = {
   list: [],
@@ -23,21 +20,5 @@ export default (state = initialState, action) => {
       }
     default:
       return state
-  }
-}
-
-export const fetchCategories = () => {
-  return dispatch => {
-    dispatch({
-      type: REQUEST_CATEGORIES
-    })
-
-    getCategories().then(
-      res => dispatch({
-        type: UPDATE_CATEGORIES,
-        categories: res.categories
-      })
-    )
-
   }
 }

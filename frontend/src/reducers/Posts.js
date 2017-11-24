@@ -1,8 +1,4 @@
-import { getAllPosts } from '../utils/contentAPI'
-
-export const REQUEST_POSTS = 'REQUEST_POSTS'
-export const UPDATE_POSTS = 'UPDATE_POSTS'
-
+import { REQUEST_POSTS, UPDATE_POSTS } from '../actions'
 
 const initialState = {
   list: [],
@@ -24,21 +20,5 @@ export default (state = initialState, action) => {
       }
     default:
       return state
-  }
-}
-
-export const fetchPosts = () => {
-  return dispatch => {
-    dispatch({
-      type: REQUEST_POSTS
-    })
-
-    getAllPosts().then(
-      res => dispatch({
-        type: UPDATE_POSTS,
-        posts: res
-      })
-    )
-
   }
 }
