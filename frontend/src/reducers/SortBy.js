@@ -1,6 +1,6 @@
-export const SET_SORT_BY = 'SET_SORT_BY'
+import {SET_SORT_BY} from '../actions'
 
-const sortByPossibilities = ['voteScore', 'timestamp']
+const sortByPossibilities = ['voteScore', 'timestamp', 'author']
 
 const initialState = 'voteScore'
 
@@ -15,8 +15,4 @@ export default (state=initialState, action) => {
     default:
       return state
   }
-}
-
-export const setSortBy = (sortBy) => {
-  return sortBy
 }
