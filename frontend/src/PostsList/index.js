@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Post from '../Post/'
+import SearchBar from '../SearchBar'
 import { addPost, removePost, getPosts } from './actions'
 
 class PostsList extends Component {
@@ -14,6 +15,9 @@ class PostsList extends Component {
 		const { posts, addPost } = this.props;
 		return (
 			<div className="list-posts-frame">
+
+				<SearchBar />
+
 				{posts && Array.isArray(posts) && posts.map( (post) => (
 					<div key={`${post.id}_li`}>
 						<Post 

@@ -83,3 +83,13 @@ body {
 	width: 70px;
 	height: 15px;
 }
+
+.search-bar {
+	width: 70%;
+	height: 30px;
+	border-radius: 15px;
+	border: 1px solid black;
+	font-size: 20px;
+	padding-left: 15px;
+	padding-right: 15px;
+}

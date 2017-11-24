@@ -47,4 +47,4 @@ export const getPosts = () => dispatch => {
 	ReadableAPI.getPosts().then(posts => {
 		dispatch(receivePosts(posts));
 	});
-  };
+};
