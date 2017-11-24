@@ -1,20 +1,45 @@
 
-import React from 'react';
-import { Route } from 'react-router-dom'
+import React, {Component} from 'react';
+import { Route, Switch } from 'react-router-dom'
 import HomeView from './HomeView'
 import CategoryView from './CategoryView'
 import SinglePostView from './SinglePostView'
 import NewPostView from './NewPostView'
+import NoMatch from './NoMatch'
 
-const App = () => (
-  <div>
-    <main>
-      <Route exact path="/" component={HomeView} />
-      <Route path="/category/:categoryName" component={CategoryView} />
-      <Route path="/post/:postId" component={SinglePostView} />
-      <Route path="/newpost" component={NewPostView} />
-    </main>
-  </div>
-)
+import { fetchCategories } from '../actions/categories'
+import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
 
-export default App
+class App extends Component {
+
+  static propTypes = {
+    fetchCategories: PropTypes.func.isRequired,
+  }
+
+  componentWillMount(){
+    this.props.fetchCategories()
+  }
+
+  render(){
+    return (
+      <div>
+        <main>
+          <Switch>
+            <Route exact path="/" component={HomeView} />
+            <Route path="/category/:categoryPath" component={CategoryView} />
+            <Route path="/post/:postId" component={SinglePostView} />
+            <Route path="/newpost" component={NewPostView} />
+            <Route component={NoMatch}/>
+          </Switch>
+        </main>
+      </div>
+    )
+  }
+}
+
+const mapDispatchToProps = {
+  fetchCategories: fetchCategories,
+}
+
+export default connect(null, mapDispatchToProps)(App)
