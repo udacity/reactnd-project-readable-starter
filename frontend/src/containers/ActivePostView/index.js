@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import {fetchActivePost} from '../../actions/activePost'
+import Post from '../Post'
 
 class ActivePostView extends Component{
   static propTypes = {
@@ -22,9 +23,7 @@ class ActivePostView extends Component{
 
     return (
       <div>
-        <h1>{post.title}</h1>
-        <h3>By {post.author}</h3>
-        <p>{post.body}</p>
+        <Post post={post}/>
       </div>
     )
   }
