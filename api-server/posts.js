@@ -24,6 +24,28 @@ const defaultData = {
     voteScore: -5,
     deleted: false,
     commentCount: 0
+  },
+  "0f0hkje5l8e8a1r68bn4": {
+    id: "0f0hkje5l8e8a1r68bn4",
+    timestamp: 1511545304455,
+    title: "Rewriting math3d in react",
+    body: "This is going to take a lot of work, but I think it will be worth it!",
+    author: "Chris",
+    category: "react",
+    voteScore: 3,
+    deleted: false,
+    commentCount:0
+  },
+  "q09b5yzfpbtfafms362e": {
+    id: "q09b5yzfpbtfafms362e",
+    timestamp: 1511545434516,
+    title: "A stupid post",
+    body: "This post stupid, so I'm going to delete it.",
+    author: "Somebody",
+    category: "redux",
+    voteScore: -2,
+    deleted: true,
+    commentCount:0
   }
 }
 
