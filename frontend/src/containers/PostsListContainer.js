@@ -12,7 +12,8 @@ class PostsListContainer extends Component {
     fetchPosts: PropTypes.func.isRequired,
     posts: PropTypes.array.isRequired,
     sortBy: PropTypes.string.isRequired,
-    setSortBy: PropTypes.func.isRequired
+    setSortBy: PropTypes.func.isRequired,
+    categoryFilter: PropTypes.string
   }
 
   componentWillMount(){
@@ -20,8 +21,9 @@ class PostsListContainer extends Component {
   }
 
   render(){
-    const {posts, sortBy, setSortBy} = this.props
+    const {posts, sortBy, setSortBy, categoryFilter} = this.props
     const comparer = postComparer(sortBy)
+    const filteredPosts = categoryFilter ? posts.filter(p => p.category===categoryFilter) : posts
 
     const sortOptions = [
       {value: 'voteScore', display: 'Votes'},
@@ -31,6 +33,7 @@ class PostsListContainer extends Component {
 
     return (
       <div>
+        Sort by
         <select name="sorter" id="sorter" onChange={ e => setSortBy(e.target.value) }>
           {sortOptions.map( opt => (
             <option key={opt.value} value={opt.value} >
@@ -38,7 +41,7 @@ class PostsListContainer extends Component {
             </option>
           ) )}
         </select>
-        <PostsList posts={posts.sort(comparer)}></PostsList>
+        <PostsList posts={filteredPosts.sort(comparer)}></PostsList>
       </div>
     )
   }

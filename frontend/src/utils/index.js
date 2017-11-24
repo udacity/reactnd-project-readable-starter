@@ -6,7 +6,7 @@ export const postComparer = (key) => {
       return (a, b) => b[key] - a[key]
     case 'timestamp':
       // Latest first
-      return (a, b) => a[key] - b[key]
+      return (a, b) => b[key] - a[key]
     case 'author':
       return (a, b) => {
         const authorA = a.author.toUpperCase();
