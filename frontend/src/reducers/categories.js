@@ -26,7 +26,7 @@ export default (state = initialState, action) => {
   }
 }
 
-export const requestCategories = () => {
+export const fetchCategories = () => {
   return dispatch => {
     dispatch({
       type: REQUEST_CATEGORIES

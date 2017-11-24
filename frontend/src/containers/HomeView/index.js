@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import { requestCategories } from '../../reducers/Categories'
+import { fetchCategories } from '../../reducers/Categories'
+import { fetchPosts } from '../../reducers/Posts'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
@@ -7,12 +8,14 @@ class HomeView extends Component {
 
   static propTypes = {
     // Both of these are injected by connect
-    requestCategories: PropTypes.func.isRequired,
+    fetchCategories: PropTypes.func.isRequired,
+    fetchPosts: PropTypes.func.isRequired,
     categories: PropTypes.array.isRequired
   }
 
   componentWillMount(){
-    this.props.requestCategories();
+    this.props.fetchCategories();
+    this.props.fetchPosts();
   }
 
   render(){
@@ -37,7 +40,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = {
-  requestCategories: requestCategories
+  fetchCategories: fetchCategories,
+  fetchPosts: fetchPosts
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomeView)
