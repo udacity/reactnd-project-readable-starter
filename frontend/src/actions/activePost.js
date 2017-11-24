@@ -17,7 +17,6 @@ export const fetchActivePost = postId => {
 
     getPost(postId).then(
       res => {
-        console.log(res)
         dispatch(setActivePost(res))
       }
     )

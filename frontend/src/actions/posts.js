@@ -1,5 +1,5 @@
 import { getAllPosts } from '../utils/contentAPI'
-import { REQUEST_POSTS, UPDATE_POSTS } from './index'
+import { REQUEST_POSTS, SET_POSTS } from './index'
 
 export const fetchPosts = () => {
   return dispatch => {
@@ -9,7 +9,7 @@ export const fetchPosts = () => {
 
     getAllPosts().then(
       res => dispatch({
-        type: UPDATE_POSTS,
+        type: SET_POSTS,
         posts: res
       })
     )

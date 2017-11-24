@@ -1,4 +1,4 @@
-import { REQUEST_POSTS, UPDATE_POSTS } from '../actions'
+import { REQUEST_POSTS, SET_POSTS } from '../actions'
 
 const initialState = {
   list: [],
@@ -12,7 +12,7 @@ export default (state = initialState, action) => {
         ...state,
         isLoading: true
       }
-    case UPDATE_POSTS:
+    case SET_POSTS:
       return {
         ...state,
         isLoading: false,

@@ -1,4 +1,4 @@
-import { REQUEST_CATEGORIES, UPDATE_CATEGORIES } from '../actions'
+import { REQUEST_CATEGORIES, SET_CATEGORIES } from '../actions'
 
 const initialState = {
   list: [],
@@ -12,7 +12,7 @@ export default (state = initialState, action) => {
         ...state,
         isLoading: true
       }
-    case UPDATE_CATEGORIES:
+    case SET_CATEGORIES:
       return {
         ...state,
         isLoading: false,

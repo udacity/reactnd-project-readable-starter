@@ -1,5 +1,5 @@
 import {getCategories} from '../utils/contentAPI'
-import { REQUEST_CATEGORIES, UPDATE_CATEGORIES } from './index'
+import { REQUEST_CATEGORIES, SET_CATEGORIES } from './index'
 
 export const fetchCategories = () => {
   return dispatch => {
@@ -9,7 +9,7 @@ export const fetchCategories = () => {
 
     getCategories().then(
       res => dispatch({
-        type: UPDATE_CATEGORIES,
+        type: SET_CATEGORIES,
         categories: res.categories
       })
     )
