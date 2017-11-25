@@ -42,7 +42,7 @@ export const removePost = ({id}) => {
     }
 }
 
-export const getPosts = () => dispatch => {
+export const getPosts = category => dispatch => {
 	dispatch(requestPosts());
 	ReadableAPI.getPosts().then(posts => {
 		dispatch(receivePosts(posts));

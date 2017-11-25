@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { Link } from "react-router-dom";
 
 import { getCategories } from './actions'
 
@@ -14,9 +15,13 @@ class CategoriesList extends Component {
 		return (
 			<div className="list-categories-frame">
 				{categories && Array.isArray(categories) && categories.map( (category) => (
-					<div className="categorie-frame">
-						<span>{category.name}</span>
-					</div>
+					<Link key={`${category.name}_link`} to={`/category/${category.path}`}>
+						<div className="categorie-frame">
+							<span>
+								{category.name}
+							</span>
+						</div>
+					</Link>	
 				))}
 			</div>
 		)

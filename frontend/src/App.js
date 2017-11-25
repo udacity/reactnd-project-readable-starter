@@ -10,7 +10,9 @@ class App extends Component {
 	render() {
 		return (
 			<div className="App main-frame">
-				<Route exact path="/" render={() => <PostsList />}  />		
+				<Route exact path="/" render={() => <PostsList  />}  />	
+				<Route exact path="/category/:category" render={(props) => <PostsList {...props} />}  />	
+				<Route exact path="/post/:postId" render={(props) => <PostsList {...props} detail={true} />} />				
 			</div>
 		);
 	}
