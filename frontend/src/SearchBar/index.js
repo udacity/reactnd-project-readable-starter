@@ -6,7 +6,7 @@ class SearchBar extends Component {
 	render () {
 		const { filter } = this.props;
 		return (
-			<div className="">
+			<div className="search-bar-frame">
 				<input type="text" 
 					className="search-bar"
 					placeholder="Filter by..."

@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Post from '../Post/'
 import SearchBar from '../SearchBar'
+import CategoriesList from '../CategoriesList'
 import { addPost, removePost, getPosts } from './actions'
 
 class PostsList extends Component {
@@ -17,6 +18,7 @@ class PostsList extends Component {
 			<div className="list-posts-frame">
 
 				<SearchBar />
+				<CategoriesList />
 
 				{posts && Array.isArray(posts) && posts.map( (post) => (
 					<div key={`${post.id}_li`}>
