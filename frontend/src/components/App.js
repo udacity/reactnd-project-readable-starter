@@ -27,6 +27,7 @@ class App extends Component {
       <div>
         <header>
           <Link to="/">Home</Link>
+          <Link to="/newpost">New Post</Link>
         </header>
         <main>
           <Switch>
