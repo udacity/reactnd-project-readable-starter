@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
+import uuidv4 from 'uuid/v4'
 
 class EditPost extends Component {
   static propTypes = {
@@ -14,8 +15,19 @@ class EditPost extends Component {
     author: ''
   }
 
-  submitForm(){
+  submitForm = () => {
     const {title, body, category, author} = this.state
+
+    const post = {
+      title,
+      body,
+      category,
+      author,
+      timestamp: Date.now(),
+      id: uuidv4(),
+      voteScore: 1,
+      deleted:false
+    }
 
   }
 
@@ -63,8 +75,8 @@ class EditPost extends Component {
             onChange={e => this.setState({ author: e.target.value })}
           />
         </label>
-        <button onClick={this.submitForm}>
-            Submit
+        <button type='button' onClick={this.submitForm}>
+          Submit
         </button>
       </form>
     )
