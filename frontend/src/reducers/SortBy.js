@@ -10,7 +10,7 @@ export default (state=initialState, action) => {
       if (sortByPossibilities.includes(action.sortBy)){
         return action.sortBy
       } else {
-        throw `Invalid sorting method: ${action.sortBy}.`
+        throw Error(`Invalid sorting method: ${action.sortBy}.`)
       }
     default:
       return state

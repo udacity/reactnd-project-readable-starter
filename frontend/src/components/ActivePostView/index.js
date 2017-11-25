@@ -9,8 +9,10 @@ import {
 } from '../../actions/activeComments'
 import Post from '../Post'
 import Comment from '../Comment'
+import {genComparer} from '../../utils'
 
 class ActivePostView extends Component{
+
   static propTypes = {
     // from URL
     match: PropTypes.object.isRequired,
@@ -29,14 +31,17 @@ class ActivePostView extends Component{
 
   render(){
     const {post, comments} = this.props
+    const comparer = genComparer('voteScore')
 
     return (
       <div>
         <Post post={post}/>
         <ul>
-          {comments.map( c => (
+          {comments.sort(comparer).map( c => (
             <li key={c.id}>
               <Comment
+                id={c.id}
+                voteScore={c.voteScore}
                 author={c.author}
                 body={c.body}
                 timestamp={c.timestamp}
@@ -51,7 +56,8 @@ class ActivePostView extends Component{
 
 const mapStateToProps = state => ({
   post: state.activePost.post,
-  comments: state.activeComments.comments
+  // for the component, it's nicer to have an array of comment objects
+  comments: Object.values(state.activeComments.comments)
 })
 
 const mapDispatchToProps = {

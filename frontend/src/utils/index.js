@@ -1,4 +1,4 @@
-export const postComparer = (key) => {
+export const genComparer = (key) => {
   // Returns a comparer function to be used in sorting arrays of posts
   switch(key){
     case 'voteScore':
@@ -20,5 +20,10 @@ export const postComparer = (key) => {
         // must be same
         return 0
       }
+    case 'none':
+      return 0
+    default:
+      // Do not sort
+      return 0
   }
 }

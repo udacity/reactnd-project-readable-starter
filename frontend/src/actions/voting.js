@@ -21,7 +21,7 @@ export const castVoteOnPost = (id, vote) => {
   }
 }
 
-export const castVoteOnCommen = (id, vote) => {
+export const castVoteOnComment = (id, vote) => {
   return dispatch => {
     dispatch({
       type: CAST_VOTE_ON_COMMENT,

@@ -21,7 +21,12 @@ export const fetchCommentsForPost = postId => {
 
     getComments(postId).then(
       res => {
-        dispatch(setActiveComments(res))
+        // res is an array, let's convert it to an object indexed by ids
+        const comments = res.reduce( (obj, item) => {
+          obj[item.id] = item
+          return obj
+        }, {})
+        dispatch(setActiveComments(comments))
       }
     )
   }

@@ -4,7 +4,7 @@ import PostsList from './PostsList'
 import { connect } from 'react-redux'
 import { fetchPosts } from '../actions/posts'
 import { setSortBy } from '../actions/sortBy'
-import { postComparer } from '../utils'
+import { genComparer } from '../utils'
 
 class PostsListContainer extends Component {
   static propTypes = {
@@ -22,7 +22,7 @@ class PostsListContainer extends Component {
 
   render(){
     const {posts, sortBy, setSortBy, categoryFilter} = this.props
-    const comparer = postComparer(sortBy)
+    const comparer = genComparer(sortBy)
     const filteredPosts = categoryFilter ? posts.filter(p => p.category===categoryFilter) : posts
 
     const sortOptions = [
@@ -34,7 +34,12 @@ class PostsListContainer extends Component {
     return (
       <div>
         Sort by
-        <select name="sorter" id="sorter" onChange={ e => setSortBy(e.target.value) }>
+        <select
+          name="sorter"
+          id="sorter"
+          value={sortBy}
+          onChange={ e => setSortBy(e.target.value) }
+          >
           {sortOptions.map( opt => (
             <option key={opt.value} value={opt.value} >
               {opt.display}
