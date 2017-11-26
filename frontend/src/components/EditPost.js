@@ -32,10 +32,6 @@ class EditPost extends Component {
     initialBody: PropTypes.string,
     initialCategory: PropTypes.string,
     initialAuthor: PropTypes.string,
-    canEditTitle: PropTypes.bool,
-    canEditBody: PropTypes.bool,
-    canEditCategory: PropTypes.bool,
-    canEditAuthor: PropTypes.bool,
     // supplied by mui withStyles
     classes: PropTypes.object.isRequired
   }
@@ -45,10 +41,6 @@ class EditPost extends Component {
     initialBody: '',
     initialCategory: '',
     initialAuthor: '',
-    canEditTitle: true,
-    canEditBody: true,
-    canEditCategory: true,
-    canEditAuthor: true,
   }
 
   state = {
@@ -61,11 +53,12 @@ class EditPost extends Component {
 
   componentWillMount(){
     const {
-      initialTitle, initialAuthor, initialBody, initialCategory,
-      canEditTitle, canEditAuthor, canEditBody, canEditCategory } = this.props
+      initialTitle, initialAuthor, initialBody, initialCategory} = this.props
     this.setState({
-      initialTitle, initialAuthor, initialBody, initialCategory,
-      canEditTitle, canEditAuthor, canEditBody, canEditCategory
+      title: initialTitle,
+      body: initialBody,
+      author: initialAuthor,
+      category: initialCategory
     })
   }
 

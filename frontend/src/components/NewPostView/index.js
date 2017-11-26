@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import { push } from 'react-router-redux'
 import PropTypes from 'prop-types'
 import EditPost from '../EditPost'
-import {createPost} from '../../actions/posts'
+import {createPost} from '../../actions/activePost'
 
 const NewPostView = (props) => {
   return (
