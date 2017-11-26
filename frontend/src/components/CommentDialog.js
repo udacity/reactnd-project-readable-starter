@@ -10,7 +10,7 @@ import Dialog, {
 
 class CommentDialog extends Component {
   static propTypes = {
-    handleRequestClose: PropTypes.func.isRequired,
+    onCloseForm: PropTypes.func.isRequired,
     onSubmitForm: PropTypes.func.isRequired,
     open: PropTypes.bool.isRequired,
     initialBody: PropTypes.string.isRequired,
@@ -45,12 +45,21 @@ class CommentDialog extends Component {
     return !(body && author)
   }
 
+  handleRequestClose = () => {
+    this.setState({
+      body:'',
+      author:'',
+      submitAttempted:false
+    })
+    this.props.onCloseForm()
+  }
+
   handleRequestSubmit = () => {
     this.setState({submitAttempted:true})
     if (! this.isMissingRequired() ){
       const {body, author} = this.state
       this.props.onSubmitForm({body, author, parentId: this.props.parentId})
-      this.props.handleRequestClose()
+      this.handleRequestClose()
     }
   }
 
@@ -73,7 +82,6 @@ class CommentDialog extends Component {
             value={this.state.author}
           />
           <TextField
-            autoFocus
             required
             error={this.isMissingAfterSubmit(this.state.body)}
             margin="dense"
@@ -88,7 +96,7 @@ class CommentDialog extends Component {
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={props.handleRequestClose} color="primary">
+          <Button onClick={this.handleRequestClose} color="primary">
             Cancel
           </Button>
           <Button onClick={this.handleRequestSubmit} color="primary">

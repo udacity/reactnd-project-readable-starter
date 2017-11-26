@@ -98,14 +98,14 @@ class ActivePostView extends Component{
         </ul>
         <CommentDialog
           open={this.props.newCommentDialogIsOpen}
-          handleRequestClose={this.props.closeNewCommentDialog}
+          onCloseForm={this.props.closeNewCommentDialog}
           onSubmitForm={this.props.newComment}
           parentId={this.props.match.params.postId}
         />
         { this.props.editCommentId &&
           <CommentDialog
             open={this.props.editCommentDialogIsOpen}
-            handleRequestClose={this.props.closeEditCommentDialog}
+            onCloseForm={this.props.closeEditCommentDialog}
             onSubmitForm={details => this.props.editComment(details, this.props.editCommentId)}
             parentId={this.props.match.params.postId}
             initialBody={this.props.comments[this.props.editCommentId]['body']}
