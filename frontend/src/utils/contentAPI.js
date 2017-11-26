@@ -34,7 +34,7 @@ export const getPost = (postId) => fetch(`${api}/posts/${postId}`, {
     res => res.json()
   )
 
-export const newPost = (post) => fetch(`${api}/posts`, {
+export const createPost = (post) => fetch(`${api}/posts`, {
     method: 'POST',
     headers: {
       ...headers,

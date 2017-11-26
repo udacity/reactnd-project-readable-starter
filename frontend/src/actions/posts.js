@@ -1,5 +1,13 @@
-import { getAllPosts } from '../utils/contentAPI'
-import { REQUEST_POSTS, SET_POSTS } from './index'
+import {
+  getAllPosts,
+  createPost as createPostAPI
+} from '../utils/contentAPI'
+import {
+  REQUEST_POSTS,
+  SET_POSTS,
+  CREATE_POST
+} from './index'
+import uuidv4 from 'uuid/v4'
 
 export const fetchPosts = () => {
   return dispatch => {
@@ -14,5 +22,24 @@ export const fetchPosts = () => {
       })
     )
 
+  }
+}
+
+
+export const createPost =  ({body, title, author, category}) => {
+  return dispatch => {
+    dispatch({
+      type: CREATE_POST
+    })
+    return createPostAPI({
+      body,
+      title,
+      author,
+      category,
+      voteScore:1,
+      deleted:false,
+      id: uuidv4(),
+      timestamp: Date.now()
+    })
   }
 }
