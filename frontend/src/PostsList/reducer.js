@@ -4,6 +4,7 @@ import {
 	REQUEST_POSTS,
 	RECEIVE_POSTS
 } from './actions'
+import { RECEIVE_POST } from '../NewPost/actions'
 
 export function postsList (state = { items: [], isLoading: false }, actionData) {
     switch (actionData.type) {
@@ -18,7 +19,14 @@ export function postsList (state = { items: [], isLoading: false }, actionData) 
 				...state,
 				items: posts.filter(post => !post.deleted),
 				isLoading: false
-			}		
+			}
+		case RECEIVE_POST: 
+			const { post } = actionData; 
+			return {
+				...state,
+				items: [...state.items, post],
+				isLoading: false
+			}	
         case ADD_POST:
 			const { newPost } = actionData;
 			const newState = [...state, newPost];

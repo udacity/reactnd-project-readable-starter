@@ -48,6 +48,11 @@ body {
 	border-right: 1px solid black;
 }
 
+.body-add-post {
+	background-color: var(--content-background-color);
+	border: 1px solid black;
+}
+
 .title {
 	float:left;
 	text-align: left;
@@ -154,4 +159,41 @@ body {
 .post-list-summary-filter {
 	width: 30%;
 	display: inline-block;
+}
+
+.new-post-frame {
+	margin-top: 40px;
+}
+
+.button {
+	width: 100px;
+	height: 30px;
+	line-height: 30px;
+	border: 1px solid black;
+	border-radius: 15px;
+	display: inline-block;
+	font-weight: bold;
+	cursor: pointer;
+	margin-left: 10px;
+	text-align: center;
+}
+
+.clear-button:hover {
+	background-color: orange;
+}
+
+.create-button:hover {
+	background-color: greenyellow;
+}
+
+.clear-button{
+	background-color: orangered;
+}
+
+.create-button{
+	background-color: green;
+}
+
+.new-post-controls{
+	text-align: right;
 }

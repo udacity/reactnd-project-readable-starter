@@ -5,7 +5,7 @@ import { changeSort } from './actions'
 
 import 'react-select/dist/react-select.css';
 import FaSortAmountAsc from 'react-icons/lib/fa/sort-amount-asc';
-import FaSortAlphaDesc from 'react-icons/lib/fa/sort-amount-desc';
+//import FaSortAlphaDesc from 'react-icons/lib/fa/sort-amount-desc';
 
 class SortMenu extends Component {
 	state = {
