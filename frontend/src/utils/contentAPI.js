@@ -34,6 +34,15 @@ export const getPost = (postId) => fetch(`${api}/posts/${postId}`, {
     res => res.json()
   )
 
+export const newPost = (post) => fetch(`${api}/posts`, {
+    method: 'POST',
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(post)
+  }).then(res =>res.json())
+
 // type should be 'comments' or 'posts'
 // vote should be 'upVote' or 'downVote'
 export const castVote = (type, id, vote) => fetch(`${api}/${type}/${id}`, {

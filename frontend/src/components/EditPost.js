@@ -1,86 +1,167 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
-import uuidv4 from 'uuid/v4'
+
+
+import TextField from 'material-ui/TextField';
+import MenuItem from 'material-ui/Menu/MenuItem';
+import { withStyles } from 'material-ui/styles';
+import Typography from 'material-ui/Typography';
+import Button from 'material-ui/Button';
+import Done from 'material-ui-icons/Done';
+
+const styles = theme => ({
+  container: {
+    display: 'flex',
+    flexWrap: 'wrap',
+  },
+  textField: {
+    marginLeft: theme.spacing.unit,
+    marginRight: theme.spacing.unit,
+    width: 200,
+  },
+  menu: {
+    width: 200,
+  },
+});
 
 class EditPost extends Component {
   static propTypes = {
-    id: PropTypes.string,
-    categories: PropTypes.array.isRequired
+    categories: PropTypes.array.isRequired,
+    onSubmitForm: PropTypes.func.isRequired,
+    initialTitle: PropTypes.string,
+    initialBody: PropTypes.string,
+    initialCategory: PropTypes.string,
+    initialAuthor: PropTypes.string,
+    canEditTitle: PropTypes.bool,
+    canEditBody: PropTypes.bool,
+    canEditCategory: PropTypes.bool,
+    canEditAuthor: PropTypes.bool,
+    // supplied by mui withStyles
+    classes: PropTypes.object.isRequired
+  }
+
+  static defaultProps = {
+    initialTitle: '',
+    initialBody: '',
+    initialCategory: '',
+    initialAuthor: '',
+    canEditTitle: true,
+    canEditBody: true,
+    canEditCategory: true,
+    canEditAuthor: true,
   }
 
   state = {
     title: '',
     body: '',
     category: '',
-    author: ''
+    author: '',
+    submitAttempted:false
   }
 
-  submitForm = () => {
-    const {title, body, category, author} = this.state
+  componentWillMount(){
+    const {
+      initialTitle, initialAuthor, initialBody, initialCategory,
+      canEditTitle, canEditAuthor, canEditBody, canEditCategory } = this.props
+    this.setState({
+      initialTitle, initialAuthor, initialBody, initialCategory,
+      canEditTitle, canEditAuthor, canEditBody, canEditCategory
+    })
+  }
 
-    const post = {
-      title,
-      body,
-      category,
-      author,
-      timestamp: Date.now(),
-      id: uuidv4(),
-      voteScore: 1,
-      deleted:false
+  isMissingAfterSubmit = field => {
+    return this.state.submitAttempted && !field
+  }
+
+  isMissingRequired = () => {
+    const {body, category, author, title} = this.state
+    return !(body && category && author && title)
+  }
+
+  handleSubmit = () => {
+    this.setState({submitAttempted:true})
+    if (! this.isMissingRequired() ){
+      const {title, body, category, author} = this.state
+      this.props.onSubmitForm({title, body, category, author})
     }
-
   }
 
   render(){
-    const {categories} = this.props
-    const {title, body, category, author} = this.state
+    const {categories, classes} = this.props
     return (
-      <form>
-        <label>
-          Title:
-          <input
-            type="text"
-            value={title}
+      <div>
+        <form className={classes.container}>
+          <TextField
+            required
+            className={classes.textField}
+            error={this.isMissingAfterSubmit(this.state.title)}
+            id="title"
+            label="Title"
+            margin="normal"
+            value={this.state.title}
             onChange={e => this.setState({ title: e.target.value })}
           />
-        </label>
-        <label>
-          Category:
-          <select
-            name="categorizer"
-            id="categorizer"
-            value={category}
+          <TextField
+            id="select-category"
+            required
+            className={classes.textField}
+            error={this.isMissingAfterSubmit(this.state.category)}
+            select
+            label="Category"
+            value={this.state.category}
             onChange={e => this.setState({ category: e.target.value })}
+            SelectProps={{
+              MenuProps: {
+                className: classes.menu,
+              },
+            }}
+            margin="normal"
             >
             {categories.map(cat => (
-              <option key={cat.path} value={cat.path}>
+              <MenuItem key={cat.path} value={cat.path}>
                 {cat.name}
-              </option>
+              </MenuItem>
             ))}
-          </select>
-        </label>
-        <label>
-          Body:
-          <textarea
-            type="text"
-            value={body}
+          </TextField>
+          <TextField
+            id="body"
+            label="Post Body"
+            fullWidth
+            margin="normal"
+            required
+            error={this.isMissingAfterSubmit(this.state.body)}
+            multiline
+            rowsMax="6"
+            value={this.state.body}
             onChange={e => this.setState({ body: e.target.value })}
           />
-        </label>
-        <label>
-          Author:
-          <input
-            type="text"
-            value={author}
+          <TextField
+            id="author"
+            required
+            className={classes.textField}
+            error={this.isMissingAfterSubmit(this.state.author)}
+            label="Author"
+            margin="normal"
+            value={this.state.author}
             onChange={e => this.setState({ author: e.target.value })}
           />
-        </label>
-        <button type='button' onClick={this.submitForm}>
+        </form>
+        <Button
+          className={classes.button}
+          raised
+          color="primary"
+          onClick={this.handleSubmit}
+          >
+          <Done className={this.props.classes.leftIcon} />
           Submit
-        </button>
-      </form>
+        </Button>
+        {this.state.submitAttempted && this.isMissingRequired()
+          ? <Typography>Some required fields are missing.</Typography>
+          : ''
+        }
+      </div>
     )
   }
 }
 
-export default EditPost
+export default withStyles(styles)(EditPost);
