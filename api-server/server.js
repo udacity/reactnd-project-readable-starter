@@ -94,6 +94,8 @@ app.get('/', (req, res) => {
     POST /comments/:id
       USAGE:
         Used for voting on a comment.
+      PARAMS:
+        option - String: Either "upVote" or "downVote"
 
     PUT /comments/:id
       USAGE:
