@@ -20,6 +20,9 @@ fetch(
 )
 ```
 
+### Comment Counts
+Posts retrieved in a list or individually now contain comment counts in the format `post: { commentCount: 0 }`.  This should make it easier to display the number of comments a post has without having to call the comments endpoint for each post.   This count is updated whenever a comment is added or deleted via the `POST /comments` or `DELETE /comments/:id` endpoints.
+
 ### API Endpoint
 
 The following endpoints are available:
@@ -37,6 +40,6 @@ The following endpoints are available:
 | `GET /posts/:id/comments` | Get all the comments for a single post. | |
 | `POST /comments` | Add a comment to a post. | **id** - Any unique ID. As with posts, UUID is probably the best here. <br> **timestamp** - [Timestamp] Get this however you want. <br> **body** - [String] <br> **author** - [String] <br> **parentId** - Should match a post id in the database. |
 | `GET /comments/:id` | Get the details for a single comment. | |
-| `POST /comments/:id` | Used for voting on a comment. | |
+| `POST /comments/:id` | Used for voting on a comment. | **option** - [String]: Either `"upVote"` or `"downVote"`.  |
 | `PUT /comments/:id` | Edit the details of an existing comment. | **timestamp** - timestamp. Get this however you want. <br> **body** - [String] |
 | `DELETE /comments/:id` | Sets a comment's deleted flag to `true`. | &nbsp; |
