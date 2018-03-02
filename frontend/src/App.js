@@ -15,6 +15,9 @@ import ActivateIcon from 'react-icons/lib/md/check';
 import DeactivateIcon from 'react-icons/lib/md/clear';
 import withRoot from './withRoot';
 import MenuItem from './components/menuItem';
+import PostList from './components/postList';
+import { CategoryAPI } from './api/CategoryAPI';
+import { PostAPI } from './api/PostAPI';
 
 
 const drawerWidth = 240;
@@ -75,6 +78,22 @@ class ResponsiveDrawer extends React.Component {
   state = {
     mobileOpen: false,
   };
+
+  componentWillMount() {
+    this.fetchPosts();
+  }
+
+  fetchCorporations = () => {
+    CategoryAPI.loadCategories().then(({ data }) => {
+      console.log(data);
+    }).catch(err => err);
+  }
+
+  fetchPosts = () => {
+    PostAPI.loadPosts().then(({ data }) => {
+      console.log(data);
+    }).catch(err => err);
+  }
 
 
   handleDrawerToggle = () => {
@@ -159,7 +178,7 @@ class ResponsiveDrawer extends React.Component {
                   exact
                   path="/"
                   render={({ match }) => (
-                    <div> teste1 </div>
+                    <PostList />
             )}
                 />
                 <Route
