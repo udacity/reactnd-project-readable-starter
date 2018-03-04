@@ -1,5 +1,6 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import Drawer from 'material-ui/Drawer';
@@ -11,13 +12,11 @@ import IconButton from 'material-ui/IconButton';
 import Hidden from 'material-ui/Hidden';
 import Divider from 'material-ui/Divider';
 import MenuIcon from 'material-ui-icons/Menu';
-import ActivateIcon from 'react-icons/lib/md/check';
-import DeactivateIcon from 'react-icons/lib/md/clear';
 import withRoot from './withRoot';
 import MenuItem from './components/menuItem';
 import PostList from './components/postList';
-import { CategoryAPI } from './api/CategoryAPI';
-import { PostAPI } from './api/PostAPI';
+import { Category } from './actions/category';
+import { PostAction } from './actions/post';
 
 
 const drawerWidth = 240;
@@ -25,7 +24,7 @@ const drawerWidth = 240;
 const styles = theme => ({
   root: {
     width: '100%',
-    height: 650,
+    height: '100%',
     marginTop: theme.spacing.unit * 3,
     zIndex: 1,
     overflow: 'hidden',
@@ -80,19 +79,7 @@ class ResponsiveDrawer extends React.Component {
   };
 
   componentWillMount() {
-    this.fetchPosts();
-  }
-
-  fetchCorporations = () => {
-    CategoryAPI.loadCategories().then(({ data }) => {
-      console.log(data);
-    }).catch(err => err);
-  }
-
-  fetchPosts = () => {
-    PostAPI.loadPosts().then(({ data }) => {
-      console.log(data);
-    }).catch(err => err);
+    this.props.fetchCategories();
   }
 
 
@@ -102,7 +89,9 @@ class ResponsiveDrawer extends React.Component {
 
 
   render() {
-    const { classes, theme } = this.props;
+    const {
+      classes, theme, categories, posts, fetchAllPosts, fetchAllPostsByCategory,
+    } = this.props;
 
     const drawer = (
       <div>
@@ -110,18 +99,23 @@ class ResponsiveDrawer extends React.Component {
         <Divider />
         <List>
           <MenuItem href="/" >
-            <ActivateIcon />
-            Test1
+            All
           </MenuItem>
+          <Divider />
         </List>
-        <Divider />
-        <List>
-          <MenuItem href="/test" >
-            <DeactivateIcon />
-            Test2
-          </MenuItem>
-        </List>
-        <Divider />
+
+        {categories.map(category => (
+          <div key={category.name}>
+            <List >
+              <MenuItem href={`/${category.path}`}>
+                {category.name}
+              </MenuItem>
+              <Divider />
+            </List>
+          </div>
+        ))}
+
+
       </div>
     );
 
@@ -142,7 +136,7 @@ class ResponsiveDrawer extends React.Component {
                     <MenuIcon />
                   </IconButton>
                   <Typography variant="title" color="inherit" noWrap>
-                  Readable
+                    Readable
                   </Typography>
                 </Toolbar>
               </AppBar>
@@ -152,12 +146,12 @@ class ResponsiveDrawer extends React.Component {
                   anchor={theme.direction === 'rtl' ? 'right' : 'left'}
                   open={this.state.mobileOpen}
                   classes={{
-                          paper: classes.drawerPaper,
-                        }}
+                    paper: classes.drawerPaper,
+                  }}
                   onClose={this.handleDrawerToggle}
                   ModalProps={{
-                          keepMounted: true, // Better open performance on mobile.
-                        }}
+                    keepMounted: true, // Better open performance on mobile.
+                  }}
                 >
                   {drawer}
                 </Drawer>
@@ -167,8 +161,8 @@ class ResponsiveDrawer extends React.Component {
                   variant="permanent"
                   open
                   classes={{
-                          paper: classes.drawerPaper,
-                        }}
+                    paper: classes.drawerPaper,
+                  }}
                 >
                   {drawer}
                 </Drawer>
@@ -178,16 +172,24 @@ class ResponsiveDrawer extends React.Component {
                   exact
                   path="/"
                   render={({ match }) => (
-                    <PostList />
-            )}
+                    <PostList posts={posts} loadPost={fetchAllPosts} />
+                  )}
                 />
-                <Route
-                  exact
-                  path="/test"
-                  render={({ match }) => (
-                    <div> teste2 </div>
-            )}
-                />
+                {this.props.categories.map(category => (
+                  <div key={category.path} >
+                    <Route
+                      exact
+                      path={`/${category.path}`}
+                      render={({ match }) => (
+                        <PostList
+                          posts={posts}
+                          loadPost={() => fetchAllPostsByCategory(category.path)}
+                        />
+                    )}
+                    />
+                  </div>
+                ))}
+
               </main>
             </div>
           </div>
@@ -201,6 +203,29 @@ class ResponsiveDrawer extends React.Component {
 ResponsiveDrawer.propTypes = {
   classes: PropTypes.object.isRequired,
   theme: PropTypes.object.isRequired,
+  fetchCategories: PropTypes.func.isRequired,
+  categories: PropTypes.array.isRequired,
+  fetchAllPosts: PropTypes.func.isRequired,
+  posts: PropTypes.array.isRequired,
+  fetchAllPostsByCategory: PropTypes.func.isRequired,
 };
 
-export default withRoot(withStyles(styles, { withTheme: true })(ResponsiveDrawer));
+function mapStateToProps({ categories, posts }) {
+  return {
+    categories,
+    posts,
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    fetchCategories: data => dispatch(Category.getAllCategories(data)),
+    fetchAllPosts: data => dispatch(PostAction.getAllPosts(data)),
+    fetchAllPostsByCategory: data => dispatch(PostAction.getAllPostsByCategory(data)),
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(withRoot(withStyles(styles, { withTheme: true })(ResponsiveDrawer)));

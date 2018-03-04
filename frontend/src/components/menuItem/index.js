@@ -23,7 +23,7 @@ const Item = styled.a`
 class MenuItem extends React.Component {
   render() {
     return (
-      <Item href={this.props.href} >
+      <Item href={this.props.href}>
         {this.props.children}
       </Item>
     );

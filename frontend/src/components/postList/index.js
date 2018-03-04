@@ -1,79 +1,72 @@
 import React from 'react';
-import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import List, {
-  ListItem,
-  ListItemAvatar,
-  ListItemIcon,
-  ListItemSecondaryAction,
-  ListItemText,
-} from 'material-ui/List';
-import Avatar from 'material-ui/Avatar';
-import IconButton from 'material-ui/IconButton';
-import FolderIcon from 'material-ui-icons/Folder';
-import DeleteIcon from 'material-ui-icons/Delete';
-import { PostAPI } from '../../api/PostAPI';
+import AddIcon from 'material-ui-icons/Add';
 import Post from '../post';
+import CreatePost from '../createPost';
 
-
-const Image = styled.img`
-   float: center;
-   width: 96%;
-   max-height: 340px;
-`;
-
-const H6 = styled.h6`
-  color: #707172;
-`;
 
 class PostList extends React.Component {
-  state ={
-    posts: [],
-  }
-
-  componentWillMount() {
-    this.fetchPosts();
-  }
-
-  componentWillReceiveProps() {
-    // this.setState({ count: 0 });
-  }
-
-  componentWillUnmount() {
-    // if (this.sleep) {
-    //   clearTimeout(this.sleep);
-    //   this.sleep = null;
-    // }
-  }
-
-  fetchPosts = () => {
-    PostAPI.loadPosts().then(({ data }) => {
-      this.setState({ posts: data });
-    }).catch(err => err);
-  }
-
-  render() {
-    return (
-      <div>
-        {this.state.posts.map(post => (
-          <div key={post.id}>
-            <Post
-              title={post.title}
-              body={post.body}
-              author={post.author}
-              timestamp={post.timestamp}
-              category={post.category}
-            />
-          </div>
-        ))}
-      </div>
-    );
-  }
+state = {
+  save: false,
 }
 
-// Post.propTypes = {
-//   serial: PropTypes.string.isRequired,
-// };
+componentWillMount() {
+  this.props.loadPost();
+}
+
+render() {
+  return (
+    <div>
+      {this.state.save ? (
+        <CreatePost onCancel={() => this.setState({ save: false })} />
+      ) : (
+        <div>
+          <ul className="list-group">
+            <li className="list-group-item active">
+              <div className="btn-group" role="group">
+                <button
+                  type="button"
+                  className="btn btn-secondary"
+                  onClick={() => this.setState({ save: true })}
+                >
+                  New Post  <AddIcon />
+                </button>
+
+              </div>
+            </li>
+
+          </ul>
+
+          {this.props.posts.map(post => (
+            <div key={post.id}>
+              <Post
+                id={post.id}
+                title={post.title}
+                body={post.body}
+                author={post.author}
+                timestamp={post.timestamp}
+                category={post.category}
+                commentCount={post.commentCount}
+                voteScore={post.voteScore}
+              />
+            </div>
+        ))}
+        </div>
+        )}
+
+    </div>
+  );
+}
+}
+
+PostList.propTypes = {
+  loadPost: PropTypes.func.isRequired,
+  posts: PropTypes.array,
+};
+
+PostList.defaultProps = {
+  posts: [],
+};
 
 
 export default PostList;
