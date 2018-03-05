@@ -6,6 +6,7 @@ import {
   DELETE_POST_SUCCESS,
   UPVOTE_POST_SUCCESS,
   DOWNVOTE_POST_SUCCESS,
+  UPDATE_POST_COMMENTS,
 } from './constants';
 
 
@@ -45,6 +46,13 @@ const createPostSuccess = post => ({
 });
 
 export class PostAction {
+  static updatePostComments = (parentId, commments) => (dispatch) => {
+    dispatch({
+      type: UPDATE_POST_COMMENTS,
+      id: parentId,
+      commments,
+    });
+  }
   static getAllPosts = () => (dispatch) => {
     PostAPI.loadPosts().then(({ data }) => {
       dispatch(getAllPostsSuccess(data));

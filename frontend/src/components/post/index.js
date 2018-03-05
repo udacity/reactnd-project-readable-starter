@@ -2,13 +2,14 @@ import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { ListItemSecondaryAction } from 'material-ui/List';
 import ChatIcon from 'material-ui-icons/Chat';
 import DeleteIcon from 'material-ui-icons/Delete';
 import EditIcon from 'material-ui-icons/Edit';
 import AddIcon from 'material-ui-icons/Add';
 import RemoveIcon from 'material-ui-icons/Remove';
 import { PostAction } from '../../actions/post';
+import { CommentAction } from '../../actions/comment';
+import CommentList from '../commentList';
 
 
 const H6 = styled.h6`
@@ -39,21 +40,36 @@ class Post extends React.Component {
     title: '',
     body: '',
     edit: false,
+    commentsShow: false,
   }
+
+  componentWillMount() {
+    this.props.fetchAllCommentsByPost(this.props.post.id);
+  }
+
   onEdit = (e) => {
     e.preventDefault();
     const postEdit = {
       title: this.state.title,
       body: this.state.body,
     };
-    this.props.editPostDips(this.props.id, postEdit);
+    this.props.editPostDips(this.props.post.id, postEdit);
     this.setState({ edit: false });
   }
+
+  setCommentsShow = () => {
+    this.setState({ commentsShow: true });
+  }
+
   setEdit = () => {
     const {
       title, body,
-    } = this.props;
+    } = this.props.post;
     this.setState({ title, body, edit: true });
+  }
+
+  closeCommentsShow = () => {
+    this.setState({ commentsShow: false });
   }
 
   cancelEdit = () => {
@@ -63,11 +79,16 @@ class Post extends React.Component {
 
   render() {
     const {
+      comments,
       timestamp,
       title, body,
       author, category,
-      deletePostDisp, id, commentCount,
-      voteScore, downVotePostDips, upVotePostDips,
+      id, commentCount,
+      voteScore,
+    } = this.props.post;
+    const {
+      deletePostDisp,
+      downVotePostDips, upVotePostDips,
     } = this.props;
 
     const datePost = new Date(timestamp).toLocaleString();
@@ -129,21 +150,26 @@ class Post extends React.Component {
             </form>
           ) : (
             <div>
-              <h5 className="card-title">{title}</h5>
-              <p className="card-text">{body}</p>
+              <div>
+                <h5 className="card-title">{title}</h5>
+                <p className="card-text">{body}</p>
+                <H6>Posted by: {author} on {datePost}</H6>
+                <div className="btn-group" role="group">
+                  <button type="button" className="btn btn-secondary" onClick={this.setEdit}>Edit  <EditIcon /></button>
+                  <button type="button" className="btn btn-secondary" onClick={this.setCommentsShow}>Comments ({commentCount}) <ChatIcon /></button>
+                  <button type="button" className="btn btn-secondary" onClick={() => deletePostDisp(id)}>Delete <DeleteIcon /></button>
+                  <button type="button" className="btn btn-secondary" onClick={() => upVotePostDips(id)}>  <AddIcon /> Votes: {voteScore}</button>
+                  <button type="button" className="btn btn-secondary" onClick={() => downVotePostDips(id)}> <RemoveIcon /></button>
+                </div>
 
-              <H6>Posted by: {author} on {datePost}</H6>
-              <div className="btn-group" role="group">
-                <button type="button" className="btn btn-secondary" onClick={this.setEdit}>Edit  <EditIcon /></button>
-                <button type="button" className="btn btn-secondary">Comments ({commentCount}) <ChatIcon /></button>
-                <button type="button" className="btn btn-secondary" onClick={() => deletePostDisp(id)}>Delete <DeleteIcon /></button>
               </div>
-              <ListItemSecondaryAction>
-                <H6>Score</H6>
-                <button type="button" className="btn-sm btn-secondary" onClick={() => upVotePostDips(id)}> <AddIcon /></button>
-                <H6>V: ({voteScore}) </H6>
-                <button type="button" className="btn-sm btn-secondary" onClick={() => downVotePostDips(id)}> <RemoveIcon /></button>
-              </ListItemSecondaryAction>
+              {this.state.commentsShow ?
+              (<CommentList
+                parentId={id}
+                comments={comments}
+                onClose={this.closeCommentsShow}
+              />) : (null)}
+
             </div>
             )}
 
@@ -154,23 +180,26 @@ class Post extends React.Component {
 }
 
 Post.propTypes = {
-  title: PropTypes.string.isRequired,
-  body: PropTypes.string.isRequired,
-  author: PropTypes.string.isRequired,
-  timestamp: PropTypes.number.isRequired,
-  category: PropTypes.string.isRequired,
+
   deletePostDisp: PropTypes.func.isRequired,
-  id: PropTypes.string.isRequired,
-  commentCount: PropTypes.number.isRequired,
-  voteScore: PropTypes.number.isRequired,
+
+
   upVotePostDips: PropTypes.func.isRequired,
   downVotePostDips: PropTypes.func.isRequired,
   editPostDips: PropTypes.func.isRequired,
+  fetchAllCommentsByPost: PropTypes.func.isRequired,
+  post: PropTypes.object.isRequired,
 };
 
+function mapStateToProps({ posts }) {
+  return {
+    posts,
+  };
+}
 
 function mapDispatchToProps(dispatch) {
   return {
+    fetchAllCommentsByPost: data => dispatch(CommentAction.getAllComments(data)),
     deletePostDisp: data => dispatch(PostAction.deletePost(data)),
     upVotePostDips: data => dispatch(PostAction.upVotePost(data)),
     downVotePostDips: data => dispatch(PostAction.downVotePost(data)),
@@ -178,4 +207,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(undefined, mapDispatchToProps)(Post);
+export default connect(mapStateToProps, mapDispatchToProps)(Post);

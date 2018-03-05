@@ -5,7 +5,14 @@ import {
   DELETE_POST_SUCCESS,
   UPVOTE_POST_SUCCESS,
   DOWNVOTE_POST_SUCCESS,
+  GET_ALL_COMMENTS_SUCCESS,
+  DELETE_COMMENT_SUCCESS,
+  CREATE_COMMENT_SUCCESS,
+  EDIT_COMMENT_SUCCESS,
+  UPVOTE_COMMENT_SUCCESS,
+  DOWNVOTE_COMMENT_SUCCESS,
 } from './../actions/constants';
+import comments from './comment';
 
 const posts = (state = [], action) => {
   switch (action.type) {
@@ -24,6 +31,12 @@ const posts = (state = [], action) => {
       ];
     case UPVOTE_POST_SUCCESS:
     case DOWNVOTE_POST_SUCCESS:
+    case DELETE_COMMENT_SUCCESS:
+    case CREATE_COMMENT_SUCCESS:
+    case GET_ALL_COMMENTS_SUCCESS:
+    case EDIT_COMMENT_SUCCESS:
+    case UPVOTE_COMMENT_SUCCESS:
+    case DOWNVOTE_COMMENT_SUCCESS:
       return state.map(p => post(p, action));
     default:
       return state;
@@ -54,6 +67,43 @@ const post = (state = {}, action) => {
       return {
         ...state,
         voteScore: state.voteScore - 1,
+      };
+    case GET_ALL_COMMENTS_SUCCESS:
+      if (state.id !== action.parentId) {
+        return state;
+      }
+      return {
+        ...state,
+        comments: action.comments,
+      };
+    case CREATE_COMMENT_SUCCESS:
+      if (state.id !== action.parentId) {
+        return state;
+      }
+      state.comments.push(action.comment);
+      return {
+        ...state,
+        commentCount: state.commentCount + 1,
+        comments: state.comments,
+      };
+    case DELETE_COMMENT_SUCCESS:
+      if (state.id !== action.parentId) {
+        return state;
+      }
+      return {
+        ...state,
+        comments: state.comments.filter(comment => comment.id !== action.id),
+        commentCount: state.commentCount - 1,
+      };
+    case EDIT_COMMENT_SUCCESS:
+    case UPVOTE_COMMENT_SUCCESS:
+    case DOWNVOTE_COMMENT_SUCCESS:
+      if (state.id !== action.parentId) {
+        return state;
+      }
+      return {
+        ...state,
+        comments: comments(state.comments, action),
       };
     default:
       return state;

@@ -40,14 +40,7 @@ render() {
           {this.props.posts.map(post => (
             <div key={post.id}>
               <Post
-                id={post.id}
-                title={post.title}
-                body={post.body}
-                author={post.author}
-                timestamp={post.timestamp}
-                category={post.category}
-                commentCount={post.commentCount}
-                voteScore={post.voteScore}
+                post={post}
               />
             </div>
         ))}
