@@ -1,0 +1,13 @@
+{
+	"extends": ["airbnb", "react-app"],
+	"rules": {
+					"react/jsx-filename-extension": ["error", { "extensions": [".js", ".jsx"] }],
+					"react/prefer-stateless-function": 0,
+					"jsx-a11y/anchor-is-valid": [ 0, {
+            "components": [ "Link" ],
+            "specialLink": [ "hrefLeft", "hrefRight" ],
+						"aspects": [ "noHref", "invalidHref", "preferButton" ]
+					}],
+					"react/forbid-prop-types": 0
+	}
+}
