@@ -1,0 +1,5 @@
+//category
+export const FETCH_CATEGORIES = "FETCH_CATEGORIES"
+export const FETCH_CATEGORIES_POSTS = "FETCH_CATEGORIES_POSTS"
+
+//post
