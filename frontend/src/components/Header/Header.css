@@ -9,7 +9,7 @@
 
 }
 
-.Bar-Name-Container {
+.Bar-Name-Add-Container {
   width: 100%;
   display: flex;
 }
@@ -31,7 +31,7 @@
 
 
 .Name-Container {
-  width: 80%;
+  width: 70%;
 	display: flex;
 }
 
@@ -41,4 +41,19 @@
   color: Blue;
   font-size: 50px;
 	padding-left: 300px;
+}
+
+.Add-Container {
+  width: 10%;
+  display: flex;
+}
+
+.Add {
+	margin-top: 1em;
+	margin-left: 1em;
+	width: 30px;
+	height: 30px;
+	cursor: pointer;
+	position: relative;
+	color: Blue;
 }

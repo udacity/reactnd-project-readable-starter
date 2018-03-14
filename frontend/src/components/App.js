@@ -3,17 +3,14 @@ import Header from './Header/Header'
 import { Route, Switch } from 'react-router-dom'
 
 import SideNav from './CategoryList/SideNav'
-// import Posts from './Posts/'
-
-// import { getCategories } from '../actions/CategoryActions'
-
+import Posts from './Posts/'
 
 
 import './App.css'
 
 class App extends Component {
   state = {
-    barClicked: false
+    barClicked: false,
   }
 
   onBarClick = () => {
@@ -40,7 +37,10 @@ class App extends Component {
           <SideNav
             sideNavClass={sideNavClass} />
           <div className={postsClass.join(' ')}>
+          <Switch>
+            <Route exact path ='/' component={Posts} />
 
+          </Switch>
 
           </div>
 

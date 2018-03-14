@@ -1,0 +1,142 @@
+/* Posts component */
+.Posts {
+  width: 70vw;
+  margin: 0 auto;
+  padding-top: 3em;
+}
+
+.SortBy {
+  display: flex;
+  margin-left: 90px;
+}
+
+.SortBy p{
+  margin-right: 20px;
+  margin-top: 10px;
+  color: blue;
+}
+
+.SortBy select{
+width: 200px;
+}
+
+
+/* Post component */
+.post {
+  padding-top: 1em;
+  padding-bottom: 1em;
+  display: flex;
+}
+
+.post-description {
+  padding-top: 10px;
+  padding-bottom: 15px;
+  padding-left: 30px;
+}
+
+.post-title {
+  margin-left: 10px;
+}
+
+.PostInfo {
+  font-size: .9em;
+  color: #8A8585;
+  padding-bottom: 15px;
+  border-bottom: 1px solid blue;
+}
+
+.post-likes {
+  margin-top: 30px;
+  width: 50px;
+  height: 80px;
+}
+
+
+.Title,
+.Delete,
+.Up,
+.Down {
+  cursor: pointer;
+}
+
+.Edit,
+.Delete {
+  margin-top: 0px;
+  width: 50px;
+  height: 30px;
+}
+
+.Author, p,
+.Total-Comments {
+  margin: 0;
+  margin-right: .5em;
+  padding: 0;
+  height: 30px;
+}
+
+.Edit a {
+  color: #fff;
+}
+
+.Edit,
+.Delete {
+  text-align: center;
+  background: blue;
+  color: white;
+  padding-left: 10px;
+  padding-right: 10px;
+  cursor: pointer;
+  margin-bottom: 5px;
+}
+
+.Up {
+  width: 80%;
+  height: 40%;
+  color: blue;
+}
+
+.Up:hover {
+  color: green;
+}
+
+.Score {
+  width: 60%;
+  margin: 0 auto;
+}
+
+.Down {
+  width: 80%;
+  height: 40%;
+  color: blue;
+}
+
+.Down:hover {
+color: red;
+}
+
+
+@media screen and (min-width: 600px) {
+  .Posts {
+    width: 65vw;
+  }
+}
+
+@media screen and (min-width: 900px) {
+  .Posts {
+    width: 50vw;
+  }
+  .PostInfo {
+    display: flex;
+    font-size: .9em;
+    color: #8A8585;
+    padding-top: .2em;
+    padding-bottom: 20px;
+    border-bottom: 1px solid blue;
+  }
+
+  .Total-Comments,
+  .Edit,
+  .Delete {
+    margin: 0 6px;
+  }
+}
