@@ -39,7 +39,7 @@ class App extends Component {
           <div className={postsClass.join(' ')}>
           <Switch>
             <Route exact path ='/' component={Posts} />
-
+            <Route exact path ='/:category' component={Posts} />
           </Switch>
 
           </div>
