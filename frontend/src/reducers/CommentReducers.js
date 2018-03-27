@@ -32,7 +32,12 @@ import { FETCH_COMMENTS, ADD_COMMENT, EDIT_COMMENT, VOTE_COMMENT, DELETE_COMMENT
       return Object.assign({}, state, {[parentId]: comments})
 
     case DELETE_COMMENT:
-      return state
+      return {
+        ...state,
+        [parentId]: state[parentId].filter(comment =>
+          comment.id !== commentId
+        )
+      }
 
     default:
       return state

@@ -1,0 +1,228 @@
+.PostDetail {
+  width: 90vw;
+  margin: 20px auto;
+  padding-top: 2em;
+}
+
+.Post-Info {
+  display: flex;
+}
+
+.Post-Info-Container {
+  margin-left: 10px;
+
+}
+
+.Post-Info-Title h3 {
+  margin: 0;
+  padding: 0;
+}
+
+.Post-Info-Category,
+.Post-Info-Time-Author span {
+  font-size: .9em;
+  color: rgb(131, 127, 127);
+}
+
+.Post-Info-Body {
+  margin-top: 20px;
+}
+
+.Post-Info-Body p {
+  margin: 0;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  line-height: 1.3em;
+}
+
+.Post-Info-Category-Container {
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.Post-Info-Edit-Delete-Container {
+  display: flex;
+}
+
+.Post-Info-Edit-Delete-Right {
+  width: 70%;
+}
+
+.Post-Info-Edit-Delete {
+  width: 30%;
+}
+
+.Post-Info-Edit a {
+  color: #fff;
+}
+
+.Post-Info-Edit,
+.Post-Info-Delete {
+  text-align: center;
+  background: blue;
+  color: white;
+  padding: 5px;
+  cursor: pointer;
+  margin-bottom: 5px;
+}
+
+.Up,
+.Down {
+  cursor: pointer;
+}
+
+.Up {
+  width: 80%;
+  height: 20%;
+  color: blue;
+}
+
+.Up:hover {
+  color: green;
+}
+
+.Score {
+  width: 60%;
+  margin: 0 auto;
+}
+
+.Down {
+  width: 80%;
+  height: 20%;
+  color: blue;
+}
+
+.Down:hover {
+color: red;
+}
+
+.Comment-Vote {
+  width: 6%
+}
+
+.CommentList {
+  width: 100%;
+  margin: 20px 0px;
+}
+
+.Comment-li {
+  list-style: none;
+}
+
+.Comment {
+  width: 100%;
+}
+
+.Comment-Container {
+  width: 100%;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  display: flex;
+}
+
+.Comment-Body {
+  width: 100%;
+  margin-left: 10px;
+}
+
+.Edit-Delete {
+  margin-top: 10px;
+  display: flex;
+}
+
+.Comment-Edit,
+.Comment-Delete {
+  width: 50%;
+}
+
+.Comment-Delete {
+  margin-left: 10px;
+}
+
+.form-style-1 {
+  margin:0;
+  max-width: 450px;
+  padding-left: 30px;
+  font: 13px "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+}
+
+.form-style-1 li {
+  padding: 0;
+  display: block;
+  list-style: none;
+  margin: 0;
+}
+.form-style-1 label{
+  margin:0 0 3px 0;
+  padding:0px;
+  display:block;
+  font-weight: bold;
+}
+
+input[type="button"] {
+  background: blue;
+  border: none;
+  color: white;
+  padding: 5px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: .7em;
+  cursor: pointer;
+  width: 100%;
+}
+
+.Comment-Button {
+  margin-top: 10px;
+  background: blue;
+  border: none;
+  color: white;
+  padding: 8px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 1.2em;
+  cursor: pointer;
+  width: 100%;
+}
+
+@media screen and (min-width: 600px) {
+
+  .PostDetail {
+    width: 70vw;
+  }
+
+  .Post-Info-Vote {
+    width: 10%;
+  }
+
+  .Post-Info-Container {
+    width: 90%;
+  }
+
+  .Comment-Edit,
+  .Comment-Delete {
+    width: 30%;
+  }
+
+  .Comment {
+    width: 90%;
+  }
+}
+
+@media screen and (min-width: 900px) {
+  .PostDetail {
+    width: 60vw;
+  }
+
+  .Comment-Edit,
+  .Comment-Delete {
+    width: 20%;
+  }
+
+  .Comment {
+    width: 95%;
+  }
+}

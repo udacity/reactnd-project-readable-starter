@@ -13,13 +13,13 @@ import './Posts.css'
 
 class SinglePost extends Component {
   componentDidMount() {
-    this.props.fetchAllPosts()
+    this.props.getAllComments(this.props.post.id)
   }
 
   onPostDelete = () => {
-      const id = this.props.match.params.id
+      const id = this.props.post.id
       this.props.postDelete(id, () => {
-        this.props.history.push('/')
+        this.props.fetchAllPosts()
       })
     }
 
@@ -66,9 +66,8 @@ class SinglePost extends Component {
 }
 
 const mapStateToProps = ({ comment }, { post }) => {
-  // const post = posts.find(posts.posts, { id: match.params.id })
   return {
-    // post: post,
+    post: post,
     comments: comment[post.id]
   }
 }

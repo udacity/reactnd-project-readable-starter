@@ -15,7 +15,7 @@
 }
 
 .Bar-Container {
-  width: 20%;
+  width: 10%;
   display: flex;
 }
 
@@ -31,8 +31,7 @@
 
 
 .Name-Container {
-  width: 70%;
-	display: flex;
+  width: 80%;
 }
 
 .Name {
@@ -40,7 +39,7 @@
   padding: 0;
   color: Blue;
   font-size: 50px;
-	padding-left: 300px;
+	text-align: center;
 }
 
 .Add-Container {

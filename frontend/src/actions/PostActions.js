@@ -42,6 +42,7 @@ export const deletePost = (id, callback) => {
     deletePostApi(id).then(() => callback())
     dispatch({
       type: DELETE_POST,
-      id })
+      id
+    })
   }
 }

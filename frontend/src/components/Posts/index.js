@@ -21,7 +21,7 @@ class Posts extends Component {
   }
 
   render() {
-    console.log('Props',this.props)
+    // console.log('Props',this.props)
     const { posts } = this.props
     return <div className = 'Posts'>
       <div className="SortBy">

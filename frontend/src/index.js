@@ -25,15 +25,14 @@ const store = createStore(
   composeEnhancers(
     applyMiddleware(logger, thunk)
   )
-);
-console.log(store.getState())
+)
+// console.log(store.getState())
 
 ReactDOM.render(
-  <Provider store={ store }>
-    <BrowserRouter>
+  <BrowserRouter>
+    <Provider store={store}>
       <App />
-    </BrowserRouter>
-  </Provider>,
-
-  document.getElementById('root'));
+    </Provider>
+  </BrowserRouter>
+  , document.getElementById('root'));
 registerServiceWorker();

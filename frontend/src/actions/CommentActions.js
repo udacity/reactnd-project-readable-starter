@@ -15,19 +15,18 @@ export const getComments = (parentId) => {
   }
 }
 
-export const addComment = (comment, parentId, callback) => {
+export const addComment = (comment) => {
   return (dispatch) => {
     addCommentApi(comment).then(comment => {
       dispatch({
         type: ADD_COMMENT,
-        parentId,
         comment
       })
-    }).then(() => callback())
+    })
   }
 }
 
-export const editComment = (commentId, parentId, comment, callback) => {
+export const editComment = (commentId, parentId, comment) => {
   return (dispatch) => {
     editCommentApi(commentId, comment)
       .then(updatedComment => {
@@ -37,7 +36,7 @@ export const editComment = (commentId, parentId, comment, callback) => {
           commentId,
           parentId
         })
-      }).then(() => callback())
+      })
   }
 }
 
@@ -54,12 +53,13 @@ export const voteComment = (commentId, parentId, option) => {
   }
 }
 
-export const deleteComment = (commentId, callback) => {
+export const deleteComment = (commentId, parentId) => {
   return (dispatch) => {
-    deleteCommentApi(commentId).then(() => callback())
+    deleteCommentApi(commentId)
     dispatch({
       type: DELETE_COMMENT,
-      commentId
+      commentId,
+      parentId
     })
   }
 }
