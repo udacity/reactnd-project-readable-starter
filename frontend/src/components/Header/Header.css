@@ -1,0 +1,58 @@
+/* Header component */
+.Header {
+	width: 100%;
+  height: 54px;
+  padding: .5em;
+	top: 0;
+	z-index: 1000;
+	background: grey;
+
+}
+
+.Bar-Name-Add-Container {
+  width: 100%;
+  display: flex;
+}
+
+.Bar-Container {
+  width: 10%;
+  display: flex;
+}
+
+.Bar {
+	margin-top: 1em;
+	margin-left: 1em;
+	width: 30px;
+	height: 30px;
+	cursor: pointer;
+	position: relative;
+	color: Blue;
+}
+
+
+.Name-Container {
+  width: 80%;
+}
+
+.Name {
+  margin: 0;
+  padding: 0;
+  color: Blue;
+  font-size: 50px;
+	text-align: center;
+}
+
+.Add-Container {
+  width: 10%;
+  display: flex;
+}
+
+.Add {
+	margin-top: 1em;
+	margin-left: 1em;
+	width: 30px;
+	height: 30px;
+	cursor: pointer;
+	position: relative;
+	color: Blue;
+}

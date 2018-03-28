@@ -1,0 +1,46 @@
+.Edit-Post {
+  width: 80vw;
+  margin: 2em auto;
+  padding-top: 1em;
+}
+.Edit-Post h2 {
+  text-align: center;
+  color: blue;
+}
+
+.Edit-Post
+input,
+select,
+textarea {
+  font-size: 1.2em;
+  width: 100%;
+  text-decoration: none;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+.Edit-Button {
+  background: blue;
+  border: none;
+  color: white;
+  padding: 10px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 1.5em;
+  margin: .5em 2px;
+  cursor: pointer;
+  width: 100%;
+}
+
+@media screen and (min-width: 600px) {
+  .Edit-Post {
+    width: 65vw;
+  }
+}
+
+@media screen and (min-width: 900px) {
+  .Edit-Post {
+    width: 45vw;
+  }
+}

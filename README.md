@@ -1,22 +1,41 @@
-# Readable API Server
+# Readable
+---
+This react-redux project is a content and comment web app. Users will be able to post content to predefined categories, comment on their posts and other users' posts, and vote on posts and comments. Users will also be able to edit and delete posts and comments.
 
-This is the starter project for the final assessment project for Udacity's Redux course where you will build a content and comment web app. Users will be able to post content to predefined categories, comment on their posts and other users' posts, and vote on posts and comments. Users will also be able to edit and delete posts and comments.
-
-This repository includes the code for the backend API Server that you'll use to develop and interact with the front-end portion of the project.
-
-## Start Developing
-
-To get started developing right away:
-
+## Getting started
+* clone or download the repo 
+    ```
+    $ git clone https://github.com/weekendchow/readable-react-project.git
+    ```
 * Install and start the API server
-    - `cd api-server`
-    - `npm install`
-    - `node server`
-* In another terminal window, use Create React App to scaffold out the front-end
-    - `create-react-app frontend`
-    - `cd frontend`
-    - `npm start`
+    ```
+    $ cd api-server
+    $ npm install
+    $ node server
+    ```
+* Install and start the frontend
+    ```
+    $ cd frontend
+    $ npm install
+    $ npm start
+    ```
+The app will run at http://localhost:3000
 
-## API Server
+## Toggle butween pages
+This application have four views:
+* Default (Root)
+* Category View
+* Post Detail View
+* Create/Edit View
 
-Information about the API server and how to use it can be found in its [README file](api-server/README.md).
+## Reference
+
+1. [React Doc](https://reactjs.org/docs/hello-world.html)
+2. [Redux Doc](https://redux.js.org/basics/usage-with-react)
+3. [Git Doc](https://git-scm.com/doc)
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+
+
