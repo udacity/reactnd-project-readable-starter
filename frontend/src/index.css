@@ -3,3 +3,56 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+nav ul li {
+  display: inline;
+  padding: 0.3em 0.5em;
+  margin-right: 0.4em;
+  background-color: #559;
+}
+nav ul li a {
+  color: #eee;
+  text-decoration: none;
+}
+
+.category-tag {
+  background-color: #559;
+  color: #eee;
+  padding: 0 0.5em;
+  margin: 0.5em;
+  border-radius: 5px;
+}
+ul.posts {
+  list-style-type: none;
+}
+ul.posts li {
+  margin: 1em 0;
+}
+.stat {
+  color: #444;
+  padding-right: 1em;
+}
+.vote {
+  float: left;
+  height: 3em;
+  padding-right: 1em;
+}
+.vote button {
+  border: none;
+  background-color: transparent;
+  font-size: 16px;
+}
+.score {
+  color: #6a7a9b;
+  text-align: center;
+  font-size: 24px;
+  display: inline-block;
+  font-weight: 600;
+  width: 1.5em;
+}
+.post {
+}

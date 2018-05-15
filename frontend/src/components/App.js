@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { Route, Link } from 'react-router-dom'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import '../App.css';
 import { connect } from 'react-redux'
 import CategoryList from './CategoryList'
-import Category from './Category'
+import PostList from './PostList'
+import { getCategories } from '../actions'
 
 class App extends Component {
   state = {
@@ -14,14 +15,22 @@ class App extends Component {
   }
   render() {
     return (
-      <div className="App">
-        <Route exact path='/:category' render={({match}) => (
-          <Category path={match.params.category} />
-        )}/>
-        <Route exact path='/' render={() => (
-          <CategoryList />
-        )}/>
-      </div>
+      <Router>
+        <Switch>
+          <Route exact path='/' render={() => (
+            <div>
+              <CategoryList />
+              <PostList />
+            </div>
+          )}/>
+          <Route path='/category/:category' render={({match}) => (
+            <div>
+              <CategoryList />
+              <PostList path={match.params.category} />
+            </div>
+          )}/>
+        </Switch>
+      </Router>
     );
   }
 }
@@ -33,12 +42,7 @@ function mapStateToProps(state, ownProps){
 }
 function mapDispatchToProps( dispatch ){
   return {
-    getCategories: () => dispatch({
-      type: 'GET_CATEGORIES',
-      meta: {
-        type: 'api'
-      }
-    })
+    getCategories: () => dispatch(getCategories())
   }
 }
 

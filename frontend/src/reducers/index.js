@@ -1,5 +1,6 @@
 import {
   GET_CATEGORIES,
+  GET_POSTS,
   ADD_POST,
   VOTE_POST,
   DELETE_POST,
@@ -17,7 +18,12 @@ function reducer (state = initialState, action) {
     case GET_CATEGORIES:
       return {
         ...state,
-        categories: action.payload
+        categories: action.payload.categories
+      }
+    case GET_POSTS:
+      return {
+        ...state,
+        posts: action.payload
       }
     case ADD_POST:
     case VOTE_POST:

@@ -1,17 +1,28 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { withRouter } from 'react-router'
+import { Link } from 'react-router-dom'
 
 class CategoryList extends Component {
   render(){
     const categories = this.props.categories
     return (
-      <div className="categories">
-        {categories.map((category) => (
-          <div className="category">
-            <a href={"/"+category.path}>{category.name}</a>
-          </div>
-        ))}
-      </div>
+      <nav>
+        <ul className="categories">
+          <li className="home">
+            <Link to="/">
+              <span role="img" aria-label="Home">🏠</span>
+            </Link>
+          </li>
+          {categories && categories.map((category) => (
+            <li className="category" key={category.path}>
+              <Link to={`/category/${category.path}`} className="category-link">
+                {category.name}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </nav>
     )
   }
 }
@@ -24,4 +35,4 @@ function mapStateToProps(state, ownProps){
   }
 }
 
-export default connect(mapStateToProps)(CategoryList)
+export default withRouter(connect(mapStateToProps)(CategoryList))

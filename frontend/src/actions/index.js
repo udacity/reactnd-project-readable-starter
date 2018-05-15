@@ -1,6 +1,7 @@
 import uuidv4 from 'uuid/v4'
 
 export const GET_CATEGORIES = 'GET_CATEGORIES'
+export const GET_POSTS = 'GET_POSTS'
 export const ADD_POST = 'ADD_POST'
 export const VOTE_POST = 'VOTE_POST'
 export const EDIT_POST = 'EDIT_POST'
@@ -16,6 +17,32 @@ function uniqueId(){
 
 function timestamp(){
   return Date.now()
+}
+
+export function getCategories(){
+  return {
+    type: GET_CATEGORIES,
+    meta: {
+      type: 'api',
+      method: 'GET',
+      path: 'categories',
+    }
+  }
+}
+
+export function getPosts(category){
+  let path = "posts"
+  if(category){
+    path = `${category}/posts`
+  }
+  return {
+    type: GET_POSTS,
+    meta: {
+      type: 'api',
+      method: 'GET',
+      path: path
+    }
+  }
 }
 
 export function addPost ({ category, title, body, author }) {

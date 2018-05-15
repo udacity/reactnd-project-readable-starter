@@ -12,6 +12,14 @@ const headers = {
   'Authorization': token
 }
 
+export const apiCall = ({type, method, path, payload}) =>
+  fetch(`${api}/${path}`, {
+    method: method,
+    headers: headers
+  })
+  .then(res => res.json())
+
+    /*
 export const getCategories = () =>
   fetch(`${api}/categories`, {
     method: 'GET',
@@ -19,6 +27,7 @@ export const getCategories = () =>
   })
   .then(res => res.json())
   .then(data => data.categories)
+  */
 
 
 export const apiMiddleware = store => next => action => {
@@ -26,9 +35,9 @@ export const apiMiddleware = store => next => action => {
     return next(action);
   }
 
-  getCategories().then((categories) => {
+  apiCall(action.meta).then((payload) => {
     let newAction = Object.assign({}, action, {
-      payload: categories
+      payload: payload
     })
     delete newAction.meta
     store.dispatch(newAction)
