@@ -9,15 +9,20 @@ if (!token)
 
 const headers = {
   'Accept': 'application/json',
-  'Authorization': token
+  'Authorization': token,
+  'Content-Type': 'application/json'
 }
 
-export const apiCall = ({type, method, path, payload}) =>
-  fetch(`${api}/${path}`, {
+export const apiCall = ({type, method, path, payload, body}) => {
+  let params = {
     method: method,
-    headers: headers
-  })
-  .then(res => res.json())
+    headers: headers,
+  }
+  if(body){
+    params.body = JSON.stringify(body)
+  }
+  return fetch(`${api}/${path}`, params).then(res => res.json())
+}
 
     /*
 export const getCategories = () =>

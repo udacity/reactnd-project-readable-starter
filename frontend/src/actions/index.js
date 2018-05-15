@@ -1,15 +1,19 @@
 import uuidv4 from 'uuid/v4'
 
-export const GET_CATEGORIES = 'GET_CATEGORIES'
-export const GET_POSTS = 'GET_POSTS'
-export const ADD_POST = 'ADD_POST'
-export const VOTE_POST = 'VOTE_POST'
-export const EDIT_POST = 'EDIT_POST'
-export const DELETE_POST = 'DELETE_POST'
-export const ADD_COMMENT = 'ADD_COMMENT'
-export const VOTE_COMMENT = 'VOTE_COMMENT'
-export const EDIT_COMMENT = 'EDIT_COMMENT'
-export const DELETE_COMMENT = 'DELETE_COMMENT'
+export const type = {
+  GET_CATEGORIES: 'GET_CATEGORIES',
+  GET_POSTS: 'GET_POSTS',
+  GET_POST: 'GET_POST',
+  GET_COMMENTS: 'GET_COMMENTS',
+  ADD_POST: 'ADD_POST',
+  VOTE_POST: 'VOTE_POST',
+  EDIT_POST: 'EDIT_POST',
+  DELETE_POST: 'DELETE_POST',
+  ADD_COMMENT: 'ADD_COMMENT',
+  VOTE_COMMENT: 'VOTE_COMMENT',
+  EDIT_COMMENT: 'EDIT_COMMENT',
+  DELETE_COMMENT: 'DELETE_COMMENT'
+}
 
 function uniqueId(){
   return uuidv4()
@@ -21,7 +25,7 @@ function timestamp(){
 
 export function getCategories(){
   return {
-    type: GET_CATEGORIES,
+    type: type.GET_CATEGORIES,
     meta: {
       type: 'api',
       method: 'GET',
@@ -36,7 +40,7 @@ export function getPosts(category){
     path = `${category}/posts`
   }
   return {
-    type: GET_POSTS,
+    type: type.GET_POSTS,
     meta: {
       type: 'api',
       method: 'GET',
@@ -45,9 +49,31 @@ export function getPosts(category){
   }
 }
 
+export function getPost(id){
+  return {
+    type: type.GET_POST,
+    meta: {
+      type: 'api',
+      method: 'GET',
+      path: `posts/${id}`
+    }
+  }
+}
+
+export function getComments(post_id){
+  return {
+    type: type.GET_COMMENTS,
+    meta: {
+      type: 'api',
+      method: 'GET',
+      path: `posts/${post_id}/comments`
+    }
+  }
+}
+
 export function addPost ({ category, title, body, author }) {
   return {
-    type: ADD_POST,
+    type: type.ADD_POST,
     id: uniqueId(),
     timestamp: timestamp(),
     title: title,
@@ -59,15 +85,23 @@ export function addPost ({ category, title, body, author }) {
 
 export function votePost({ id, option }){
   return {
-    type: VOTE_POST,
+    type: type.VOTE_POST,
     id: id,
-    option: option
+    option: option,
+    meta: {
+      type: 'api',
+      method: 'POST',
+      path: `posts/${id}`,
+      body: {
+        option: option
+      }
+    }
   }
 }
 
 export function editPost({ id, title, body }){
   return {
-    type: EDIT_POST,
+    type: type.EDIT_POST,
     id: id,
     timestamp: timestamp(),
     title: title,
@@ -77,14 +111,14 @@ export function editPost({ id, title, body }){
 
 export function deletePost({ id }){
   return {
-    type: DELETE_POST,
+    type: type.DELETE_POST,
     id: id
   }
 }
 
 export function addComment({ parentId, body, author }){
   return {
-    type: ADD_COMMENT,
+    type: type.ADD_COMMENT,
     id: uniqueId(),
     timestamp: timestamp(),
     body: body,
@@ -95,15 +129,23 @@ export function addComment({ parentId, body, author }){
 
 export function voteComment({ id, option }){
   return {
-    type: VOTE_COMMENT,
+    type: type.VOTE_COMMENT,
     id: id,
-    option: option
+    option: option,
+    meta: {
+      type: 'api',
+      method: 'POST',
+      path: `comments/${id}`,
+      body: {
+        option: option
+      }
+    }
   }
 }
 
 export function editComment({ id, body }){
   return {
-    type: EDIT_COMMENT,
+    type: type.EDIT_COMMENT,
     id: id,
     timestamp: timestamp(),
     body: body

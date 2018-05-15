@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
-import { getPosts } from '../actions'
-import { Link } from 'react-router-dom'
+import { getPosts, votePost } from '../actions'
+import PostListItem from './PostListItem'
 
 class PostList extends Component {
   componentDidMount(){
@@ -14,7 +14,7 @@ class PostList extends Component {
     }
   }
   render(){
-    const { category, posts } = this.props
+    const { category, posts, vote } = this.props
     return (
       <div>
         <h1>
@@ -22,29 +22,16 @@ class PostList extends Component {
         </h1>
         <ul className="posts">
           {posts && posts.map((post) => (
-            <li key={post.id}>
-              <div className="vote">
-                <button><span role="img" aria-label="Vote Down">⬇️</span></button>
-                <div className="score">{post.voteScore}</div>
-                <button><span role="img" aria-label="Vote Up">⬆️</span></button>
-              </div>
-              <div className="post">
-                <Link to="/posts/{post.id}">
-                  {post.title}
-                </Link>
-                {! category && (
-                  <span className="category-tag">{post.category}</span>
-                )}
-                 &mdash; 
-                <span className="stat"><em>{post.author}</em></span>
-                <br />
-                <span className="stat">{post.commentCount} comments</span>
-              </div>
-            </li>
+            <PostListItem
+              key={post.id}
+              post={post}
+              vote={vote}
+              category={category}
+            />
           ))}
         </ul>
         {posts && posts.length === 0 && (
-          <span>The opportunity to first-post in a category doesn't come around often!</span>
+          <div className="no-posts">The opportunity to first-post in a category doesn't come around often!</div>
         )}
       </div>
     )
@@ -52,7 +39,6 @@ class PostList extends Component {
 }
 
 function mapStateToProps(state, ownProps){
-  //console.log(state)
   const filteredCats = state.categories.filter((cat) => cat.path === ownProps.path)
   return {
     category: filteredCats[0],
@@ -61,7 +47,8 @@ function mapStateToProps(state, ownProps){
 }
 function mapDispatchToProps( dispatch ){
   return {
-    getPosts: (category) => dispatch(getPosts(category))
+    getPosts: (category) => dispatch(getPosts(category)),
+    vote: (id, option) => dispatch(votePost({id, option}))
   }
 }
 

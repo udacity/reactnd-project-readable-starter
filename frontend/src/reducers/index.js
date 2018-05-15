@@ -1,13 +1,4 @@
-import {
-  GET_CATEGORIES,
-  GET_POSTS,
-  ADD_POST,
-  VOTE_POST,
-  DELETE_POST,
-  ADD_COMMENT,
-  VOTE_COMMENT,
-  DELETE_COMMENT
-} from '../actions'
+import { type } from '../actions'
 
 const initialState = {
   categories: []
@@ -15,22 +6,50 @@ const initialState = {
 
 function reducer (state = initialState, action) {
   switch(action.type){
-    case GET_CATEGORIES:
+    case type.GET_CATEGORIES:
       return {
         ...state,
         categories: action.payload.categories
       }
-    case GET_POSTS:
+    case type.GET_POSTS:
       return {
         ...state,
+        post: undefined,
         posts: action.payload
       }
-    case ADD_POST:
-    case VOTE_POST:
-    case DELETE_POST:
-    case ADD_COMMENT:
-    case VOTE_COMMENT:
-    case DELETE_COMMENT:
+    case type.GET_COMMENTS:
+      return {
+        ...state,
+        comments: action.payload
+      }
+    case type.ADD_POST:
+      return {
+        ...state
+      }
+    case type.GET_POST:
+      return {
+        ...state,
+        post: action.payload
+      }
+    case type.VOTE_POST:
+      return {
+        ...state,
+        post: action.payload,
+        posts: state.posts ? state.posts.map((post) => {
+          return post.id === action.payload.id ? action.payload : post
+        }) : [ action.payload ]
+      }
+    case type.VOTE_COMMENT:
+      return {
+        ...state,
+        comments: state.comments ? state.comments.map((comment) => {
+          return comment.id === action.payload.id ? action.payload : comment
+        }) : [ action.payload ]
+      }
+    case type.DELETE_POST:
+    case type.ADD_COMMENT:
+    case type.VOTE_COMMENT:
+    case type.DELETE_COMMENT:
       return {
         ...state
       }
