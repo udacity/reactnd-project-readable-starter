@@ -6,7 +6,9 @@ export default function posts(state = [], action) {
     case type.GET_POSTS:
       return action.payload
     case type.ADD_POST:
-      return state
+      let added = state.slice()
+      added.push(action.payload)
+      return added
     case type.GET_POST:
       posts = []
       let found = false
@@ -28,16 +30,13 @@ export default function posts(state = [], action) {
         return post.id === action.payload.id ? action.payload : post
       })
     case type.DELETE_POST:
-      state.filter((post) => post.id !== action.payload.id).map((post) => {
-        posts.push(post)
-        return post
-      })
-      return posts
-      /*
-      posts: state.posts ? state.posts.map((post) => {
-        return post.id === action.payload.id ? action.payload : post
-      }) : [ action.payload ]
-      */
+      return state.filter((post) => post.id !== action.payload.id).slice()
+    case type.SORT_POSTS:
+      let sorted = state.slice()
+      sorted.sort(action.sortFunc)
+      if( action.reverse )
+        sorted.reverse()
+      return sorted
     default:
       return state
   }

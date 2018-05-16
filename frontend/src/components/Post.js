@@ -1,16 +1,18 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { getPost, getComments, votePost, voteComment, addComment, deletePost } from '../actions'
+import { getPost, getComments, votePost,  deletePost } from '../actions'
+import { voteComment, addComment, deleteComment } from '../actions'
 import PostListItem from './PostListItem'
-import Vote from './Vote'
+import Comment from './Comment'
+import NewComment from './NewComment'
 
 class Post extends Component {
   componentDidMount() {
-    this.props.getPost(this.props.postId)
     this.props.getComments(this.props.postId)
+    this.props.getPost(this.props.postId)
   }
   render(){
-    const { post, comments, votePost, voteComment, addComment, deletePost } = this.props
+    const { post, comments, votePost, voteComment, deletePost, addComment, deleteComment } = this.props
     return post ? (
       <div>
         <h1>{post.category}</h1>
@@ -25,31 +27,19 @@ class Post extends Component {
         <div className="post-body"><p>{post.body}</p></div>
         <h4>Comments</h4>
         {! post.deleted && post.title && (
-        <div className="add-comment">
-          <textarea id="comment-body"></textarea>
-          <br />
-          <input type="text" id="author" placeholder="Author" />
-          <button onClick={() => {
-            let author = document.getElementById("author").value
-            let body = document.getElementById("comment-body").value
-            addComment( post.id, body, author)
-          }}>Submit</button>
-        </div>
+          <NewComment
+            postId={post.id}
+            addComment={addComment}
+          />
         )}
         <ul className="comments">
           {comments && comments.map((comment) => (
-            <li key={comment.id}>
-              <Vote
-                objectId={comment.id}
-                onClick={voteComment}
-                score={comment.voteScore}
-              />
-              <div className="comment">
-                <div className="body">{comment.body}
-                  <em> &mdash;{comment.author}</em>
-                </div>
-              </div>
-            </li>
+            <Comment
+              key={comment.id}
+              comment={comment}
+              onVote={voteComment}
+              onDelete={deleteComment}
+            />
           ))}
         </ul>
       </div>
@@ -70,7 +60,8 @@ function mapDispatchToProps( dispatch ){
     getComments: (id) => dispatch(getComments(id)),
     votePost: (id, option) => dispatch(votePost({id, option})),
     voteComment: (id, option) => dispatch(voteComment({id, option})),
-    addComment: (parentId, body, author) => dispatch(addComment({parentId, body, author}))
+    addComment: (parentId, body, author) => dispatch(addComment({parentId, body, author})),
+    deleteComment: (id) => dispatch(deleteComment(id)),
   }
 }
 

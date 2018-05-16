@@ -8,6 +8,7 @@ export const type = {
   VOTE_POST: 'VOTE_POST',
   EDIT_POST: 'EDIT_POST',
   DELETE_POST: 'DELETE_POST',
+  SORT_POSTS: 'SORT_POSTS',
   GET_COMMENTS: 'GET_COMMENTS',
   ADD_COMMENT: 'ADD_COMMENT',
   VOTE_COMMENT: 'VOTE_COMMENT',
@@ -21,6 +22,19 @@ function uniqueId(){
 
 function timestamp(){
   return Date.now()
+}
+
+function sortFunc(key){
+  return (a,b) => a[key] < b[key]
+}
+
+
+export function sortPosts(key, reverse){
+  return {
+    type: type.SORT_POSTS,
+    sortFunc: sortFunc(key),
+    reverse: reverse,
+  }
 }
 
 export function getCategories(){
@@ -72,14 +86,23 @@ export function getComments(post_id){
 }
 
 export function addPost ({ category, title, body, author }) {
-  return {
-    type: type.ADD_POST,
+  let data = {
     id: uniqueId(),
     timestamp: timestamp(),
     title: title,
     body: body,
     author: author,
     category: category
+  }
+  return {
+    type: type.ADD_POST,
+    meta: {
+      type: 'api',
+      method: 'POST',
+      path: 'posts',
+      body: data
+    },
+    ...data
   }
 }
 
@@ -163,5 +186,17 @@ export function editComment({ id, body }){
     id: id,
     timestamp: timestamp(),
     body: body
+  }
+}
+
+export function deleteComment(id){
+  return {
+    type: type.DELETE_COMMENT,
+    id: id,
+    meta: {
+      type: 'api',
+      method: 'DELETE',
+      path: `comments/${id}`
+    }
   }
 }

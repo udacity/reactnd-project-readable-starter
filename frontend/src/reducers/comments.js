@@ -9,17 +9,11 @@ export default function comments(state = [], action) {
         return comment.id === action.payload.id ? action.payload : comment
       })
     case type.ADD_COMMENT:
-      let comments = []
-      if( state.comments ){
-        state.comments.map((comment) => {
-          comments.push(comment)
-          return comment
-        })
-      }
-      comments.push(action.payload)
-      return comments
+      let added = state.slice()
+      added.push(action.payload)
+      return added
     case type.DELETE_COMMENT:
-      return state
+      return state.filter((comment) => comment.id !== action.payload.id).slice()
     default:
       return state
   }

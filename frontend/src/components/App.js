@@ -5,7 +5,8 @@ import { connect } from 'react-redux'
 import CategoryList from './CategoryList'
 import PostList from './PostList'
 import Post from './Post'
-import { getCategories } from '../actions'
+import NewPost from './NewPost'
+import { getCategories, addPost } from '../actions'
 
 class App extends Component {
   state = {
@@ -28,6 +29,11 @@ class App extends Component {
             <div>
               <CategoryList />
               <PostList path={match.params.category} />
+              <h4>New Post</h4>
+              <NewPost
+                category={match.params.category}
+                addPost={this.props.addPost}
+              />
             </div>
           )}/>
           <Route exact path='/' render={() => (
@@ -49,7 +55,8 @@ function mapStateToProps(state, ownProps){
 }
 function mapDispatchToProps( dispatch ){
   return {
-    getCategories: () => dispatch(getCategories())
+    getCategories: () => dispatch(getCategories()),
+    addPost: (category, title, body, author) => dispatch(addPost({category, title, body, author})),
   }
 }
 

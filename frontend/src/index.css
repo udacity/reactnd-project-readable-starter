@@ -71,10 +71,10 @@ ul.posts li {
   width: 1.5em;
 }
 
-/*
 .comments .vote {
-  height: 2em;
+  height: 1em;
 }
+/*
 .comments .vote button {
   font-size: 12px;
 }
@@ -103,10 +103,33 @@ ul.comments li div.body {
 .add-comment {
   margin: 1em;
 }
-.add-comment textarea {
+textarea {
   height: 5em;
-  width: 50%
+  width: 50%;
+  border: 1px solid #e9e9e9;
+  font-family: Verdana, Geneva, sans-serif;
 }
 .add-comment input {
   width: 40%
 }
+#author {
+  font-style: oblique;
+}
+
+.new-post {
+  margin: 1em;
+  padding: 0.5em;
+  background-color: #f0f0f0;
+  width: 60%
+}
+.new-post textarea {
+  width: 100%
+}
+.new-post #title {
+  width: 98%;
+  font-size: 18px;
+}
+.new-post #author {
+  width: 80%;
+}
+
