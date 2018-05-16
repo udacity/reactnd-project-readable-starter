@@ -40,7 +40,7 @@ export const apiMiddleware = store => next => action => {
     return next(action);
   }
 
-  apiCall(action.meta).then((payload) => {
+  return apiCall(action.meta).then((payload) => {
     let newAction = Object.assign({}, action, {
       payload: payload
     })

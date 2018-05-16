@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux'
+import { addComment } from '../actions'
 
 class NewComment extends Component {
   submitComment = (event) => {
@@ -26,4 +28,14 @@ class NewComment extends Component {
   }
 }
 
-export default NewComment
+function mapStateToProps(state, ownProps){
+  return {
+  }
+}
+function mapDispatchToProps( dispatch ){
+  return {
+    addComment: (parentId, body, author) => dispatch(addComment({parentId, body, author})),
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(NewComment)

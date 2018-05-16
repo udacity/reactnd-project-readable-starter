@@ -1,19 +1,17 @@
 import { type } from '../actions'
+import { slicePush, mapUpdate, sliceFilter } from './helpers'
 
 export default function comments(state = [], action) {
   switch(action.type){
     case type.GET_COMMENTS:
       return action.payload
     case type.VOTE_COMMENT:
-      return state.map((comment) => {
-        return comment.id === action.payload.id ? action.payload : comment
-      })
+    case type.EDIT_COMMENT:
+      return mapUpdate(state, action.payload)
     case type.ADD_COMMENT:
-      let added = state.slice()
-      added.push(action.payload)
-      return added
+      return slicePush(state, action.payload)
     case type.DELETE_COMMENT:
-      return state.filter((comment) => comment.id !== action.payload.id).slice()
+      return sliceFilter(state, action.payload)
     default:
       return state
   }

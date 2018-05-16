@@ -66,6 +66,7 @@ export function getPosts(category){
 export function getPost(id){
   return {
     type: type.GET_POST,
+    id: id,
     meta: {
       type: 'api',
       method: 'GET',
@@ -123,12 +124,20 @@ export function votePost({ id, option }){
 }
 
 export function editPost({ id, title, body }){
+  let data = {
+    title: title,
+    body: body,
+  }
   return {
     type: type.EDIT_POST,
     id: id,
-    timestamp: timestamp(),
-    title: title,
-    body: body
+    meta: {
+      type: 'api',
+      method: 'PUT',
+      path: `posts/${id}`,
+      body: data,
+    },
+    ...data
   }
 }
 
@@ -181,11 +190,20 @@ export function voteComment({ id, option }){
 }
 
 export function editComment({ id, body }){
+  let data = {
+    timestamp: timestamp(),
+    body: body
+  }
   return {
     type: type.EDIT_COMMENT,
     id: id,
-    timestamp: timestamp(),
-    body: body
+    meta: {
+      type: 'api',
+      method: 'PUT',
+      path: `comments/${id}`,
+      body: data
+    },
+    ...data
   }
 }
 

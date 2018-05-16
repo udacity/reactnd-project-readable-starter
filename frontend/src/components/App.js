@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import CategoryList from './CategoryList'
 import PostList from './PostList'
 import Post from './Post'
-import NewPost from './NewPost'
+import PostEdit from './PostEdit'
 import { getCategories, addPost } from '../actions'
 
 class App extends Component {
@@ -19,6 +19,13 @@ class App extends Component {
     return (
       <Router>
         <Switch>
+          <Route path='/:category/:post_id/edit' render={({match}) => (
+            <div>
+              <CategoryList />
+              <h1>Edit Post</h1>
+              <PostEdit postId={match.params.post_id} />
+            </div>
+          )}/>
           <Route path='/:category/:post_id' render={({match}) => (
             <div>
               <CategoryList />
@@ -30,9 +37,10 @@ class App extends Component {
               <CategoryList />
               <PostList path={match.params.category} />
               <h4>New Post</h4>
-              <NewPost
+              <PostEdit
+                post={{title:""}}
                 category={match.params.category}
-                addPost={this.props.addPost}
+                onSubmit={this.props.addPost}
               />
             </div>
           )}/>

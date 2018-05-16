@@ -2,6 +2,11 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
 import Vote from './Vote'
 
+function formatTimestamp(timestamp){
+  let date = new Date(timestamp)
+  return date.toISOString()
+}
+
 class PostListItem extends Component {
   render(){
     const { post, vote, category, onDelete } = this.props
@@ -19,6 +24,14 @@ class PostListItem extends Component {
           objectId={post.id}
           score={post.voteScore}
         />
+        <div className="redact">
+          <Link to={`/${post.category}/${post.id}/edit`}>
+            <span role="img" aria-label="Delete">✏️</span>
+          </Link>
+          <button onClick={() => onDelete(post.id)}>
+            <span role="img" aria-label="Delete">🗑</span>
+          </button>
+        </div>
         <div className="post">
           <Link to={`/${post.category}/${post.id}`}>
             {post.title}
@@ -30,8 +43,7 @@ class PostListItem extends Component {
           <span className="stat"><em>{post.author}</em></span>
           <br />
           <span className="stat">{post.commentCount} comments</span>
-          <button>Edit</button>
-          <button onClick={() => onDelete(post.id)}>Delete</button>
+          <span className="stat">posted at {formatTimestamp(post.timestamp)}</span>
         </div>
       </li>
     )

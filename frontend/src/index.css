@@ -3,6 +3,12 @@ body {
   padding: 0;
   font-family: Verdana, Geneva, sans-serif;
 }
+.error {
+  margin: 1em;
+  text-align: center;
+  font-size: 18pt;
+  color: #933;
+}
 nav ul {
   list-style-type: none;
   margin: 0;
@@ -15,6 +21,7 @@ nav ul li {
   background-color: #559;
 }
 nav ul li a {
+  padding: 0.3em 0.5em;
   color: #eee;
   text-decoration: none;
   font-variant: small-caps;
@@ -29,6 +36,27 @@ h4 {
   text-align: left;
   padding-left: 1em;
 }
+
+.sort button {
+	border: none;
+	color: #987;
+	cursor: pointer;
+	background-color: transparent;
+	margin-right: 0.5em;
+	font-size: 12pt;
+}
+
+.sort button:before {
+	content: "   ";
+}
+
+.sort button.selected:before {
+	content: "↓";
+}
+.sort button.selected.reverse:before {
+	content: "↑";
+}
+
 .no-posts {
   text-align: center;
   color: #383;
@@ -48,7 +76,8 @@ ul.posts li {
   margin: 1em 0;
 }
 .stat {
-  color: #444;
+  color: #666; /* evil */
+  font-size: 10pt;
   padding-right: 1em;
 }
 
@@ -61,6 +90,7 @@ ul.posts li {
   border: none;
   background-color: transparent;
   font-size: 16px;
+  cursor: pointer;
 }
 .score {
   color: #6a7a9b;
@@ -69,6 +99,22 @@ ul.posts li {
   display: inline-block;
   font-weight: 600;
   width: 1.5em;
+}
+
+.redact {
+  float:right;
+  margin-right:0.5em;
+  font-size: 12pt;
+}
+.redact button {
+  padding: 0.4em 1em;
+  background-color: transparent;
+  border: none;
+  font-size: 12pt;
+  cursor: pointer;
+}
+.redact button:hover {
+  background-color: #df9
 }
 
 .comments .vote {
@@ -116,20 +162,19 @@ textarea {
   font-style: oblique;
 }
 
-.new-post {
+.post-edit {
   margin: 1em;
   padding: 0.5em;
   background-color: #f0f0f0;
   width: 60%
 }
-.new-post textarea {
+.post-edit textarea {
   width: 100%
 }
-.new-post #title {
+.post-edit #title {
   width: 98%;
   font-size: 18px;
 }
-.new-post #author {
+.post-edit #author {
   width: 80%;
 }
-

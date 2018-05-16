@@ -40,9 +40,6 @@ class PostList extends Component {
             />
           ))}
         </ul>
-        {posts && posts.length === 0 && (
-          <div className="no-posts">The opportunity to first-post in a category doesn't come around often!</div>
-        )}
       </div>
     )
   }
@@ -65,5 +62,4 @@ function mapDispatchToProps( dispatch ){
   }
 }
 
-//export default Category
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(PostList))
