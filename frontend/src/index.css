@@ -83,7 +83,6 @@ ul.posts li {
 }
 */
 
-
 .post {
 }
 .post-body {
@@ -99,4 +98,15 @@ ul.comments li div.body {
   background-color: #f9f9f9;
   margin: 1em;
   padding: 0.5em 1em;
+}
+
+.add-comment {
+  margin: 1em;
+}
+.add-comment textarea {
+  height: 5em;
+  width: 50%
+}
+.add-comment input {
+  width: 40%
 }

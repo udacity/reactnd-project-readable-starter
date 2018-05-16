@@ -4,7 +4,7 @@ import './index.css';
 import App from './components/App';
 import registerServiceWorker from './registerServiceWorker';
 import { applyMiddleware, createStore } from 'redux'
-import reducer from './reducers'
+import reducer from './reducers/index'
 import apiMiddleware from './components/BackendAPI'
 import { Provider } from 'react-redux'
 

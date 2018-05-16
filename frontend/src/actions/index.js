@@ -4,11 +4,11 @@ export const type = {
   GET_CATEGORIES: 'GET_CATEGORIES',
   GET_POSTS: 'GET_POSTS',
   GET_POST: 'GET_POST',
-  GET_COMMENTS: 'GET_COMMENTS',
   ADD_POST: 'ADD_POST',
   VOTE_POST: 'VOTE_POST',
   EDIT_POST: 'EDIT_POST',
   DELETE_POST: 'DELETE_POST',
+  GET_COMMENTS: 'GET_COMMENTS',
   ADD_COMMENT: 'ADD_COMMENT',
   VOTE_COMMENT: 'VOTE_COMMENT',
   EDIT_COMMENT: 'EDIT_COMMENT',
@@ -109,21 +109,35 @@ export function editPost({ id, title, body }){
   }
 }
 
-export function deletePost({ id }){
+export function deletePost(id){
   return {
     type: type.DELETE_POST,
-    id: id
+    id: id,
+    meta: {
+      type: 'api',
+      method: 'DELETE',
+      path: `posts/${id}`
+    }
   }
 }
 
 export function addComment({ parentId, body, author }){
-  return {
-    type: type.ADD_COMMENT,
+  let data = {
     id: uniqueId(),
     timestamp: timestamp(),
     body: body,
     author: author,
-    parentId: parentId
+    parentId: parentId,
+  }
+  return {
+    type: type.ADD_COMMENT,
+    meta: {
+      type: 'api',
+      method: 'POST',
+      path: 'comments',
+      body: data
+    },
+    ...data
   }
 }
 

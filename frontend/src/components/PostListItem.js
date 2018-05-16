@@ -4,7 +4,14 @@ import Vote from './Vote'
 
 class PostListItem extends Component {
   render(){
-    const { post, vote, category } = this.props
+    const { post, vote, category, onDelete } = this.props
+    if(post.deleted || ! post.title){
+      return (
+        <li>
+          [deleted]
+        </li>
+      )
+    }
     return (
       <li>
         <Vote
@@ -24,7 +31,7 @@ class PostListItem extends Component {
           <br />
           <span className="stat">{post.commentCount} comments</span>
           <button>Edit</button>
-          <button>Delete</button>
+          <button onClick={() => onDelete(post.id)}>Delete</button>
         </div>
       </li>
     )

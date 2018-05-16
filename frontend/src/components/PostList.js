@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
-import { getPosts, votePost } from '../actions'
+import { getPosts, votePost, deletePost } from '../actions'
 import PostListItem from './PostListItem'
 
 class PostList extends Component {
@@ -14,7 +14,7 @@ class PostList extends Component {
     }
   }
   render(){
-    const { category, posts, vote } = this.props
+    const { category, posts, vote, deletePost } = this.props
     return (
       <div>
         <h1>
@@ -27,6 +27,7 @@ class PostList extends Component {
               post={post}
               vote={vote}
               category={category}
+              onDelete={deletePost}
             />
           ))}
         </ul>
@@ -39,7 +40,7 @@ class PostList extends Component {
 }
 
 function mapStateToProps(state, ownProps){
-  const filteredCats = state.categories.filter((cat) => cat.path === ownProps.path)
+  const filteredCats = state.categories ? state.categories.filter((cat) => cat.path === ownProps.path) : {}
   return {
     category: filteredCats[0],
     posts: state.posts
@@ -47,6 +48,7 @@ function mapStateToProps(state, ownProps){
 }
 function mapDispatchToProps( dispatch ){
   return {
+    deletePost: (id) => dispatch(deletePost(id)),
     getPosts: (category) => dispatch(getPosts(category)),
     vote: (id, option) => dispatch(votePost({id, option}))
   }
