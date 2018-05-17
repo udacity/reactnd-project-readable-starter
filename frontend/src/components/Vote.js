@@ -6,11 +6,11 @@ class Vote extends Component {
     return (
       <div className="vote">
         <button onClick={() => onClick(objectId, "downVote")}>
-          <span role="img" aria-label="Vote Down">⬇️</span>
+          <span role="img" aria-label="Vote Down">👎</span>
         </button>
         <div className="score">{score}</div>
         <button onClick={() => onClick(objectId, "upVote")}>
-          <span role="img" aria-label="Vote Up">⬆️</span>
+          <span role="img" aria-label="Vote Up">👍</span>
         </button>
       </div>
     )

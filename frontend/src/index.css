@@ -93,12 +93,13 @@ ul.posts li {
   cursor: pointer;
 }
 .score {
-  color: #6a7a9b;
+  color: #ffcc00;
   text-align: center;
   font-size: 24px;
   display: inline-block;
   font-weight: 600;
   width: 1.5em;
+  text-shadow: 1px 2px 2px #a84;
 }
 
 .redact {
