@@ -4,7 +4,7 @@ import Vote from './Vote'
 
 function formatTimestamp(timestamp){
   let date = new Date(timestamp)
-  return date.toISOString()
+  return date.toLocaleString()
 }
 
 class PostListItem extends Component {

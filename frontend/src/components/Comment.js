@@ -66,7 +66,7 @@ class Comment extends Component {
   }
 }
 
-const mapStateToProps = (state, ownProps) => {}
+const mapStateToProps = (state, ownProps) => ({})
 const mapDispatchToProps = ( dispatch ) => ({
   editComment: (id, body) => dispatch(editComment({id, body})),
   voteComment: (id, option) => dispatch(voteComment({id, option})),

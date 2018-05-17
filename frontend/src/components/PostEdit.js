@@ -27,10 +27,12 @@ class PostEdit extends Component {
     }
     if(this.props.postId){
       editPost(this.props.postId, title.value, body.value).then(() => {
-        this.setState({redirect: true})
+        this.setState({redirect: `/${this.props.post.category}/${this.props.post.id}`})
       })
     } else {
-      addPost(category, title.value, body.value, author.value)
+      addPost(category, title.value, body.value, author.value).then((id) => {
+        this.setState({redirect: `/${category}/${id}`})
+      })
     }
     title.value = ""
     body.value = ""
@@ -41,26 +43,30 @@ class PostEdit extends Component {
     if( ! post )
       return <div />
     return (
-      <div className="post-edit">
-        {! this.props.category && (
-          <div>
-            Category: 
-            <select ref={this.categoryInput} className="category-tag">
-              {this.props.categories.map((cat) => (
-                <option value={cat.path}>{cat.name}</option>
-              ))}
-            </select>
-          </div>
-        )}
-        <input ref={this.titleInput} id="title" placeholder="Title" defaultValue={post.title}></input>
-        <br />
-        <textarea ref={this.bodyInput} id="post-body" placeholder="Type the body of your new post here" defaultValue={post.body}></textarea>
-        <br />
-        <input ref={this.authorInput} id="author" placeholder="Author" defaultValue={post.author} readOnly={this.props.postId}></input>
-        <button onClick={this.submitPost}>Submit</button>
-        {this.state.redirect && (
-          <Redirect to={`${this.props.post.category}/${this.props.post.id}`} />
-        )}
+      <div>
+        <h1>{this.props.category || this.props.post.category}</h1>
+        <h4>{this.props.postId ? "Edit Post" : "New Post"}</h4>
+        <div className="post-edit">
+          {! this.props.category && ! this.props.postId && (
+            <div>
+              Category: 
+              <select ref={this.categoryInput} className="category-tag">
+                {this.props.categories.map((cat) => (
+                  <option key={cat.path} value={cat.path}>{cat.name}</option>
+                ))}
+              </select>
+            </div>
+          )}
+          <input ref={this.titleInput} id="title" placeholder="Title" defaultValue={post.title}></input>
+          <br />
+          <textarea ref={this.bodyInput} id="post-body" placeholder="Type the body of your new post here" defaultValue={post.body}></textarea>
+          <br />
+          <input ref={this.authorInput} id="author" placeholder="Author" defaultValue={post.author} readOnly={this.props.postId}></input>
+          <button onClick={this.submitPost}>Submit</button>
+          {this.state.redirect && (
+            <Redirect to={this.state.redirect} />
+          )}
+        </div>
       </div>
     )
   }
@@ -76,7 +82,12 @@ const mapStateToProps = (state, ownProps) => (
 )
 const mapDispatchToProps = (dispatch) => ({
   getPost: (id) => dispatch(getPost(id)),
-  addPost: (category, title, body, author) => dispatch(addPost({category, title, body, author})),
+  addPost: (category, title, body, author) => {
+    const add = addPost({category, title, body, author})
+    return dispatch(add).then(() => {
+      return add.id
+    })
+  },
   editPost: (id, title, body) => dispatch(editPost({id, title, body})),
 })
 export default connect(mapStateToProps, mapDispatchToProps)(PostEdit)

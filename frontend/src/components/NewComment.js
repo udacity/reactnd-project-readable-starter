@@ -28,7 +28,7 @@ class NewComment extends Component {
   }
 }
 
-const mapStateToProps = (state, ownProps) => {}
+const mapStateToProps = (state, ownProps) => ({})
 const mapDispatchToProps = (dispatch) => ({
   addComment: (parentId, body, author) => dispatch(addComment({parentId, body, author})),
 })
