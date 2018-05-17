@@ -7,6 +7,7 @@ class PostEdit extends Component {
   bodyInput = React.createRef()
   titleInput = React.createRef()
   authorInput = React.createRef()
+  categoryInput = React.createRef()
   state = {
     redirect: false
   }
@@ -16,10 +17,11 @@ class PostEdit extends Component {
     }
   }
   submitPost = () => {
-    const { category, addPost, editPost } = this.props
+    const { addPost, editPost } = this.props
     let title = this.titleInput.current
     let body = this.bodyInput.current
     let author = this.authorInput.current
+    let category = this.props.category ? this.props.category : this.categoryInput.current.value
     if(title.value.length * author.value.length * body.value.length === 0){
       return false
     }
@@ -40,6 +42,16 @@ class PostEdit extends Component {
       return <div />
     return (
       <div className="post-edit">
+        {! this.props.category && (
+          <div>
+            Category: 
+            <select ref={this.categoryInput} className="category-tag">
+              {this.props.categories.map((cat) => (
+                <option value={cat.path}>{cat.name}</option>
+              ))}
+            </select>
+          </div>
+        )}
         <input ref={this.titleInput} id="title" placeholder="Title" defaultValue={post.title}></input>
         <br />
         <textarea ref={this.bodyInput} id="post-body" placeholder="Type the body of your new post here" defaultValue={post.body}></textarea>
@@ -55,7 +67,10 @@ class PostEdit extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => (
-  ownProps.post ? {} : {
+  ownProps.post ? {
+    categories: state.categories
+  } : {
+    categories: state.categories,
     post: state.posts.filter((post) => post.id === ownProps.postId)[0],
   }
 )

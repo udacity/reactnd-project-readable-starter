@@ -6,6 +6,11 @@ import PostList from '../components/PostList'
 export const all = ({match}) => (
   <div id="content">
     <PostList />
+    <h4>New Post</h4>
+    <PostEdit
+      post={{title:""}}
+      category={match.params.category}
+    />
   </div>
 )
 
