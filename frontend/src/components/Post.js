@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { getPost, getComments, votePost,  deletePost } from '../actions'
-import PostListItem from './PostListItem'
 import Comment from './Comment'
 import NewComment from './NewComment'
+import PostListItem from './PostListItem'
 
 class Post extends Component {
   componentDidMount() {

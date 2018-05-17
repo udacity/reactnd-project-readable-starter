@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { withRouter } from 'react-router'
 import { Link } from 'react-router-dom'
 
 class CategoryList extends Component {
@@ -35,4 +34,4 @@ function mapStateToProps(state, ownProps){
   }
 }
 
-export default withRouter(connect(mapStateToProps)(CategoryList))
+export default connect(mapStateToProps)(CategoryList)

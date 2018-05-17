@@ -1,75 +1,19 @@
-import React, { Component } from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import '../App.css';
-import { connect } from 'react-redux'
-import CategoryList from './CategoryList'
-import PostList from './PostList'
-import Post from './Post'
-import PostEdit from './PostEdit'
-import { getCategories, addPost } from '../actions'
+import React from 'react';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import CategoryList from '../components/CategoryList'
+import { all, category, edit, post } from '../views/index'
 
-class App extends Component {
-  state = {
-    categories: []
-  }
-  componentDidMount() {
-    this.props.getCategories()
-  }
-  render() {
-    return (
-      <Router>
-        <Switch>
-          <Route path='/:category/:post_id/edit' render={({match}) => (
-            <div>
-              <CategoryList />
-              <h1>Edit Post</h1>
-              <PostEdit postId={match.params.post_id} />
-            </div>
-          )}/>
-          <Route path='/:category/:post_id' render={({match}) => (
-            <div>
-              <CategoryList />
-              <Post postId={match.params.post_id} />
-            </div>
-          )}/>
-          <Route path='/:category' render={({match}) => (
-            <div>
-              <CategoryList />
-              <PostList path={match.params.category} />
-              <h4>New Post</h4>
-              <PostEdit
-                post={{title:""}}
-                category={match.params.category}
-                onSubmit={this.props.addPost}
-              />
-            </div>
-          )}/>
-          <Route exact path='/' render={() => (
-            <div>
-              <CategoryList />
-              <PostList />
-            </div>
-          )}/>
-        </Switch>
-      </Router>
-    );
-  }
-}
-
-function mapStateToProps(state, ownProps){
-  return {
-    categories: state.categories
-  }
-}
-function mapDispatchToProps( dispatch ){
-  return {
-    getCategories: () => dispatch(getCategories()),
-    addPost: (category, title, body, author) => dispatch(addPost({category, title, body, author})),
-  }
-}
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(App)
-
+export default () => (
+  <Router>
+    <div>
+      <CategoryList />
+      <Switch>
+        <Route component={edit}     path='/:category/:post_id/edit' />
+        <Route component={post}     path='/:category/:post_id' />
+        <Route component={category} path='/:category' />
+        <Route component={all}      path='/' exact />
+      </Switch>
+    </div>
+  </Router>
+)

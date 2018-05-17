@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { withRouter } from 'react-router'
 import { getPosts, votePost, deletePost, sortPosts } from '../actions'
 import PostListItem from './PostListItem'
 import Sort from './Sort'
@@ -62,4 +61,4 @@ function mapDispatchToProps( dispatch ){
   }
 }
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(PostList))
+export default connect(mapStateToProps, mapDispatchToProps)(PostList)

@@ -1,18 +1,21 @@
+import './index.css';
+import registerServiceWorker from './registerServiceWorker';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './components/App';
-import registerServiceWorker from './registerServiceWorker';
 import { applyMiddleware, createStore } from 'redux'
-import reducer from './reducers/index'
-import apiMiddleware from './components/BackendAPI'
 import { Provider } from 'react-redux'
+import { getCategories } from './actions'
+import apiMiddleware from './BackendAPI'
+import App from './components/App';
+import reducer from './reducers/index'
 
 const store = createStore(
   reducer,
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
   applyMiddleware(apiMiddleware)
 )
+
+store.dispatch(getCategories())
 
 ReactDOM.render(
   <Provider store={store}>
