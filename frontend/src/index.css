@@ -1,0 +1,196 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Verdana, Geneva, sans-serif;
+}
+nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+nav ul li {
+  display: inline;
+  padding: 0.3em 0.5em;
+  margin-right: 0.4em;
+  background-color: #559;
+}
+nav ul li a {
+  padding: 0.3em 0.5em;
+  color: #eee;
+  text-decoration: none;
+  font-variant: small-caps;
+}
+
+#content {
+  margin: 1em;
+}
+.error {
+  text-align: center;
+  font-size: 18pt;
+  color: #933;
+}
+h1, h2, h3, h4 {
+  color: #448;
+  text-align: center;
+  font-variant: small-caps;
+}
+h3, h4 {
+  text-align: left;
+}
+
+.sort button {
+  border: none;
+  color: #987;
+  cursor: pointer;
+  background-color: transparent;
+  margin-right: 0.5em;
+  font-size: 12pt;
+}
+
+.sort button:before {
+	content: "   ";
+}
+
+.sort button.selected:before {
+	content: "↓";
+}
+.sort button.selected.reverse:before {
+	content: "↑";
+}
+
+.no-posts {
+  text-align: center;
+  color: #383;
+}
+
+.category-tag {
+  border: 1px solid #eee;
+  background-color: #559;
+  color: #eee;
+  padding: 0 0.5em;
+  margin: 0.5em;
+  border-radius: 5px;
+  font-variant: small-caps;
+}
+ul.posts {
+  list-style-type: none;
+}
+ul.posts li {
+  margin: 0.5em 0;
+}
+.stat {
+  color: #666; /* evil */
+  font-size: 10pt;
+  padding-right: 1em;
+}
+
+.clearfix:before, .clearfix:after {
+  content: "";
+  display: table;
+}
+.clearfix:after {
+  clear: both;
+}
+.clearfix {
+  zoom: 1
+}
+
+.vote {
+  float: left;
+  padding-right: 1em;
+}
+.vote button {
+  border: none;
+  background-color: transparent;
+  font-size: 16px;
+  cursor: pointer;
+}
+.score {
+  color: #ffcc00;
+  text-align: center;
+  font-size: 24px;
+  display: inline-block;
+  font-weight: 600;
+  width: 1.5em;
+  text-shadow: 1px 2px 2px #a84;
+}
+
+.redact {
+  float:right;
+  margin-right:0.5em;
+  font-size: 12pt;
+}
+.redact button {
+  padding: 0.4em 1em;
+  background-color: transparent;
+  border: none;
+  font-size: 12pt;
+  cursor: pointer;
+}
+.redact button:hover {
+  background-color: #df9
+}
+
+/*
+.comments .vote button {
+  font-size: 12px;
+}
+.comments .vote .score {
+  font-size: 16px;
+}
+*/
+
+.post-body {
+  background-color: #f9f9f9;
+  padding: 0 1em;
+  border: 1px solid #e9e9e9;
+}
+ul.comments {
+  list-style-type: none
+}
+ul.comments li {
+  margin: 0.5em 0;
+}
+ul.comments li div.body {
+  background-color: #f9f9f9;
+  padding: 0.5em 1em;
+}
+
+input, textarea {
+  border: 1px solid #e9e9e9;
+  font-family: Verdana, Geneva, sans-serif;
+}
+textarea {
+  height: 5em;
+  width: 50%;
+}
+.add-comment input {
+  width: 40%
+}
+#author {
+  font-style: oblique;
+}
+
+.post-edit {
+  padding: 0.5em;
+  background-color: #f0f0f0;
+  width: 60%;
+  color: #888;
+  font-size: 12pt;
+}
+.post-edit select {
+  font-size: 12pt;
+  font-variant: small-caps;
+  margin-bottom: 0.2em;
+  border-radius: 5px;
+}
+.post-edit textarea {
+  width: 100%
+}
+.post-edit #title {
+  width: 98%;
+  font-size: 18px;
+}
+.post-edit #author {
+  width: 80%;
+}
