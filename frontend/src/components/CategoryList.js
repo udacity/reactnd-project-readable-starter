@@ -28,10 +28,7 @@ class CategoryList extends Component {
 
 // export default CategoryList
 
-function mapStateToProps(state, ownProps){
-  return {
+const mapStateToProps = (state, ownProps) => ({
     categories: state.categories
-  }
-}
-
+})
 export default connect(mapStateToProps)(CategoryList)

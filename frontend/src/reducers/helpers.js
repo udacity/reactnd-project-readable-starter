@@ -3,6 +3,7 @@ export function slicePush(state, payload){
   added.push(payload)
   return added
 }
+
 export function mapUpdate(state, payload){
   let found = false
   let updated = state.map((item) => {
@@ -18,6 +19,7 @@ export function mapUpdate(state, payload){
   }
   return updated
 }
+
 export function sliceFilter(state, payload){
   return state.filter((item) => item.id !== payload.id).slice()
 }

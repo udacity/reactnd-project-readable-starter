@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { getPost, getComments, votePost,  deletePost } from '../actions'
+import { getPost, votePost,  deletePost } from '../actions/posts'
+import { getComments } from '../actions/comments'
 import Comment from './Comment'
 import NewComment from './NewComment'
 import PostListItem from './PostListItem'
@@ -33,12 +34,7 @@ class Post extends Component {
             />
           </ul>
           <div className="post-body"><p>{post.body}</p></div>
-          <h4>Comments</h4>
-          {! post.deleted && post.title && (
-            <NewComment
-              postId={post.id}
-            />
-          )}
+          <h3>Comments</h3>
           <ul className="comments">
             {comments && comments.map((comment) => (
               <Comment
@@ -47,6 +43,12 @@ class Post extends Component {
               />
             ))}
           </ul>
+          <h4>New Comment</h4>
+          {! post.deleted && post.title && (
+            <NewComment
+              postId={post.id}
+            />
+          )}
         </div>
       )
     } else {
@@ -55,20 +57,15 @@ class Post extends Component {
   }
 }
 
-function mapStateToProps(state, ownProps){
-  return {
-    post: state.posts.filter((post) => post.id === ownProps.postId).shift(),
-    comments: state.comments,
-    error: state.error
-  }
-}
-function mapDispatchToProps( dispatch ){
-  return {
-    getPost: (id) => dispatch(getPost(id)),
-    votePost: (id, option) => dispatch(votePost({id, option})),
-    deletePost: (id) => dispatch(deletePost(id)),
-    getComments: (id) => dispatch(getComments(id)),
-  }
-}
-
+const mapStateToProps = (state, ownProps) => ({
+  post: state.posts.filter((post) => post.id === ownProps.postId).shift(),
+  comments: state.comments,
+  error: state.error
+})
+const mapDispatchToProps = (dispatch) => ({
+  getPost: (id) => dispatch(getPost(id)),
+  votePost: (id, option) => dispatch(votePost({id, option})),
+  deletePost: (id) => dispatch(deletePost(id)),
+  getComments: (id) => dispatch(getComments(id)),
+})
 export default connect(mapStateToProps, mapDispatchToProps)(Post)

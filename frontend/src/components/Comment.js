@@ -1,13 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { editComment, voteComment, deleteComment } from '../actions'
+import { editComment, voteComment, deleteComment } from '../actions/comments'
 import Vote from './Vote'
 
 class Comment extends Component {
-  constructor(props){
-    super(props)
-    this.bodyInput = React.createRef()
-  }
+  bodyInput = React.createRef()
   state = {
     editing: false
   }
@@ -69,15 +66,10 @@ class Comment extends Component {
   }
 }
 
-function mapStateToProps(state, ownProps){
-  return {}
-}
-function mapDispatchToProps( dispatch ){
-  return {
-    editComment: (id, body) => dispatch(editComment({id, body})),
-    voteComment: (id, option) => dispatch(voteComment({id, option})),
-    deleteComment: (id) => dispatch(deleteComment(id)),
-  }
-}
-
+const mapStateToProps = (state, ownProps) => {}
+const mapDispatchToProps = ( dispatch ) => ({
+  editComment: (id, body) => dispatch(editComment({id, body})),
+  voteComment: (id, option) => dispatch(voteComment({id, option})),
+  deleteComment: (id) => dispatch(deleteComment(id)),
+})
 export default connect(mapStateToProps, mapDispatchToProps)(Comment)

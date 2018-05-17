@@ -4,7 +4,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { applyMiddleware, createStore } from 'redux'
 import { Provider } from 'react-redux'
-import { getCategories } from './actions'
+import { getCategories } from './actions/categories'
 import apiMiddleware from './BackendAPI'
 import App from './components/App';
 import reducer from './reducers/index'

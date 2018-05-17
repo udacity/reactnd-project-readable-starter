@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { getPosts, votePost, deletePost, sortPosts } from '../actions'
+import { getPosts, votePost, deletePost, sortPosts } from '../actions/posts'
 import PostListItem from './PostListItem'
 import Sort from './Sort'
 
@@ -44,7 +44,7 @@ class PostList extends Component {
   }
 }
 
-function mapStateToProps(state, ownProps){
+const mapStateToProps = (state, ownProps) => {
   const filteredCats = state.categories ? state.categories.filter((cat) => cat.path === ownProps.path) : {}
   const posts = ownProps.path ? state.posts.filter((post) => post.category === ownProps.path) : state.posts
   return {
@@ -52,13 +52,10 @@ function mapStateToProps(state, ownProps){
     posts: posts
   }
 }
-function mapDispatchToProps( dispatch ){
-  return {
-    sortPosts: (key, reverse) => dispatch(sortPosts(key, reverse)),
-    deletePost: (id) => dispatch(deletePost(id)),
-    getPosts: (category) => dispatch(getPosts(category)),
-    vote: (id, option) => dispatch(votePost({id, option}))
-  }
-}
-
+const mapDispatchToProps = (dispatch) => ({
+  sortPosts: (key, reverse) => dispatch(sortPosts(key, reverse)),
+  deletePost: (id) => dispatch(deletePost(id)),
+  getPosts: (category) => dispatch(getPosts(category)),
+  vote: (id, option) => dispatch(votePost({id, option}))
+})
 export default connect(mapStateToProps, mapDispatchToProps)(PostList)

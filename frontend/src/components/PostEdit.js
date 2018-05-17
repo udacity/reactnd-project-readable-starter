@@ -1,15 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { getPost, addPost, editPost } from '../actions'
+import { getPost, addPost, editPost } from '../actions/posts'
 import { Redirect } from 'react-router-dom'
 
 class PostEdit extends Component {
-  constructor(props){
-    super(props)
-    this.bodyInput = React.createRef()
-    this.titleInput = React.createRef()
-    this.authorInput = React.createRef()
-  }
+  bodyInput = React.createRef()
+  titleInput = React.createRef()
+  authorInput = React.createRef()
   state = {
     redirect: false
   }
@@ -57,20 +54,14 @@ class PostEdit extends Component {
   }
 }
 
-function mapStateToProps(state, ownProps){
-  if(ownProps.post){
-    return {}
-  }
-  return {
+const mapStateToProps = (state, ownProps) => (
+  ownProps.post ? {} : {
     post: state.posts.filter((post) => post.id === ownProps.postId)[0],
   }
-}
-function mapDispatchToProps( dispatch ){
-  return {
-    getPost: (id) => dispatch(getPost(id)),
-    addPost: (category, title, body, author) => dispatch(addPost({category, title, body, author})),
-    editPost: (id, title, body) => dispatch(editPost({id, title, body})),
-  }
-}
-
+)
+const mapDispatchToProps = (dispatch) => ({
+  getPost: (id) => dispatch(getPost(id)),
+  addPost: (category, title, body, author) => dispatch(addPost({category, title, body, author})),
+  editPost: (id, title, body) => dispatch(editPost({id, title, body})),
+})
 export default connect(mapStateToProps, mapDispatchToProps)(PostEdit)
