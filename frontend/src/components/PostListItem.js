@@ -18,7 +18,7 @@ class PostListItem extends Component {
       )
     }
     return (
-      <li>
+      <li className='clearfix'>
         <Vote
           onClick={vote}
           objectId={post.id}

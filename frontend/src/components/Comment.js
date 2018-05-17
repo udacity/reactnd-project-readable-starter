@@ -28,13 +28,13 @@ class Comment extends Component {
     const { comment, voteComment, deleteComment } = this.props
     return (
       <li>
-        <Vote
-          objectId={comment.id}
-          onClick={voteComment}
-          score={comment.voteScore}
-        />
         {this.state.editing ? (
-          <div className="comment">
+          <div className="comment clearfix">
+            <Vote
+              objectId={comment.id}
+              onClick={voteComment}
+              score={comment.voteScore}
+            />
             <div className="redact">
               &nbsp;<br />
               <button onClick={this.onSave}><span role="img" aria-label="Save">✅</span></button>
@@ -47,7 +47,12 @@ class Comment extends Component {
             </div>
           </div>
         ) : (
-          <div className="comment">
+          <div className="comment clearfix">
+            <Vote
+              objectId={comment.id}
+              onClick={voteComment}
+              score={comment.voteScore}
+            />
             <div className="redact">
               <button onClick={this.onEdit}><span role="img" aria-label="Delete">✏️</span></button>
               <button onClick={() => deleteComment(comment.id)}><span role="img" aria-label="Delete">🗑</span></button>

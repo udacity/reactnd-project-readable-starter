@@ -74,7 +74,7 @@ ul.posts {
   list-style-type: none;
 }
 ul.posts li {
-  margin: 1em 0;
+  margin: 0.5em 0;
 }
 .stat {
   color: #666; /* evil */
@@ -82,9 +82,19 @@ ul.posts li {
   padding-right: 1em;
 }
 
+.clearfix:before, .clearfix:after {
+  content: "";
+  display: table;
+}
+.clearfix:after {
+  clear: both;
+}
+.clearfix {
+  zoom: 1
+}
+
 .vote {
   float: left;
-  height: 3em;
   padding-right: 1em;
 }
 .vote button {
@@ -119,9 +129,6 @@ ul.posts li {
   background-color: #df9
 }
 
-.comments .vote {
-  height: 1em;
-}
 /*
 .comments .vote button {
   font-size: 12px;
@@ -131,24 +138,22 @@ ul.posts li {
 }
 */
 
-.post {
-}
 .post-body {
   background-color: #f9f9f9;
   padding: 0 1em;
   border: 1px solid #e9e9e9;
 }
 ul.comments {
-  list-style-type: square
+  list-style-type: none
+}
+ul.comments li {
+  margin: 0.5em 0;
 }
 ul.comments li div.body {
   background-color: #f9f9f9;
-  margin: 1em;
   padding: 0.5em 1em;
 }
 
-.add-comment {
-}
 textarea {
   height: 5em;
   width: 50%;
