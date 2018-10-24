@@ -31,11 +31,14 @@ class NavDropdownMenu extends React.Component {
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
-              <NavItem>
-                <NavLink href="/components/">Components</NavLink>
+              <NavItem >
+                <NavLink href="/post">Post</NavLink>
               </NavItem>
               <NavItem>
                 <NavLink href="https://github.com/reactstrap/reactstrap">GitHub</NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink href="/">GitHub</NavLink>
               </NavItem>
             </Nav>
           </Collapse>
